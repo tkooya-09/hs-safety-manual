@@ -1,0 +1,4169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화성시 안전관리 매뉴얼 | 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<style>
+:root {
+  /* Color System - 화성시 안전관리 ID (Mid-tone) */
+  --bg: #1c2336;
+  --bg-1: #232b41;
+  --bg-2: #2b3450;
+  --bg-3: #34405f;
+  --bg-4: #3f4c6e;
+  --line: #424f72;
+  --line-2: #56638a;
+  --text: #f5f7fb;
+  --text-2: #c5cce0;
+  --text-3: #8b95b3;
+  --text-4: #677292;
+
+  /* Brand */
+  --brand: #ffd60a;
+  --brand-2: #ffa200;
+  --brand-glow: rgba(255,214,10,0.18);
+
+  /* Phase Colors */
+  --phase-1: #00b4d8;
+  --phase-2: #f9c74f;
+  --phase-3: #f94144;
+  --phase-4: #06d6a0;
+
+  /* Severity */
+  --sev-attention: #4cc9f0;
+  --sev-caution: #ffd60a;
+  --sev-alert: #ff8500;
+  --sev-severe: #d00000;
+
+  /* Category */
+  --cat-natural: #4cc9f0;
+  --cat-social: #ef476f;
+  --cat-safety: #b5179e;
+  --cat-common: #06d6a0;
+
+  --shadow-lg: 0 24px 80px rgba(0,0,0,0.5);
+  --shadow-md: 0 12px 32px rgba(0,0,0,0.35);
+
+  /* Edit Mode */
+  --edit: #06d6a0;
+  --edit-soft: rgba(6,214,160,0.12);
+  --edit-border: rgba(6,214,160,0.4);
+}
+
+/* ====== EDIT MODE ====== */
+body.edit-mode .editable {
+  position: relative;
+  cursor: text;
+  transition: all 0.15s;
+  border-radius: 4px;
+}
+body.edit-mode .editable:hover {
+  outline: 1px dashed var(--edit-border);
+  outline-offset: 2px;
+  background: var(--edit-soft);
+}
+body.edit-mode .editable:focus {
+  outline: 2px solid var(--edit);
+  outline-offset: 2px;
+  background: var(--edit-soft);
+}
+
+/* dash-edit 전용 - 인라인 요소도 자연스럽게 */
+body.edit-mode .dash-edit {
+  cursor: text;
+  transition: all 0.15s;
+  border-radius: 4px;
+  position: relative;
+}
+body.edit-mode .dash-edit:hover {
+  outline: 1px dashed var(--edit-border);
+  outline-offset: 3px;
+  background: var(--edit-soft);
+}
+body.edit-mode .dash-edit:focus {
+  outline: 2px solid var(--edit);
+  outline-offset: 3px;
+  background: rgba(6,214,160,0.1);
+}
+body.edit-mode .dash-edit:focus-visible {
+  outline: 2px solid var(--edit);
+}
+
+/* hero-title em은 인라인-블록으로 표시 */
+body.edit-mode .hero-title .dash-edit {
+  display: inline-block;
+  padding: 0 4px;
+}
+body.edit-mode .editable::after {
+  content: '✎';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--edit);
+  color: #000;
+  font-size: 9px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+body.edit-mode .editable:hover::after { display: flex; }
+
+body.edit-mode .deletable {
+  position: relative;
+}
+body.edit-mode .deletable .del-btn {
+  display: block;
+}
+.del-btn {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--sev-severe);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+  font-family: inherit;
+  transition: all 0.15s;
+  box-shadow: 0 2px 8px rgba(208,0,0,0.4);
+}
+.del-btn:hover {
+  transform: scale(1.15);
+  background: #ef0d0d;
+}
+
+body.edit-mode .add-btn {
+  display: inline-flex;
+}
+.add-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: var(--edit-soft);
+  border: 1px dashed var(--edit);
+  color: var(--edit);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-top: 8px;
+}
+.add-btn:hover {
+  background: var(--edit);
+  color: #000;
+}
+.add-btn::before {
+  content: '+';
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.edit-toggle {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+.edit-toggle:hover {
+  background: var(--bg-4);
+  border-color: var(--edit);
+}
+.edit-toggle.active {
+  background: var(--edit);
+  border-color: var(--edit);
+  color: #000;
+}
+.edit-toggle::before {
+  content: '✎';
+  font-size: 13px;
+}
+
+/* Edit notice banner */
+.edit-banner {
+  display: none;
+  background: linear-gradient(135deg, var(--edit-soft), transparent);
+  border-left: 4px solid var(--edit);
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: var(--text-2);
+  align-items: center;
+  gap: 16px;
+}
+body.edit-mode .edit-banner { display: flex; }
+.edit-banner-icon {
+  font-size: 20px;
+  color: var(--edit);
+}
+.edit-banner-text strong {
+  color: var(--edit);
+  font-weight: 700;
+}
+.edit-banner-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.edit-action-btn {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.edit-action-btn:hover { background: var(--bg-4); border-color: var(--edit); }
+.edit-action-btn.primary {
+  background: var(--edit);
+  border-color: var(--edit);
+  color: #000;
+}
+.edit-action-btn.primary:hover { background: #07f0b0; }
+.edit-action-btn.danger {
+  background: transparent;
+  border-color: var(--sev-severe);
+  color: var(--sev-severe);
+}
+.edit-action-btn.danger:hover { background: var(--sev-severe); color: white; }
+
+/* Save indicator */
+.save-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--edit);
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 12px 32px rgba(6,214,160,0.4);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 9999;
+}
+.save-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Phase Add Item in modal */
+body.edit-mode .manual-phase {
+  cursor: default;
+}
+body.edit-mode .phase-add {
+  display: block;
+  font-size: 11px;
+  color: var(--edit);
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 4px 0;
+  border-top: 1px dashed var(--edit-border);
+  text-align: center;
+  font-weight: 600;
+}
+.phase-add {
+  display: none;
+}
+
+/* Add Type Card */
+.add-type-card {
+  background: transparent;
+  border: 2px dashed var(--edit-border);
+  border-radius: 14px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 140px;
+  color: var(--edit);
+  font-weight: 600;
+}
+body.edit-mode .add-type-card {
+  display: flex;
+}
+.add-type-card:hover {
+  background: var(--edit-soft);
+  border-style: solid;
+}
+.add-type-card-icon {
+  font-size: 28px;
+  font-weight: 300;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard', -apple-system, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.1px;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Background atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,214,10,0.06), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 80% 100%, rgba(76,201,240,0.05), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ====== TOP NAV ====== */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(28,35,54,0.88);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-bottom: 1px solid var(--line);
+}
+.topnav-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #000;
+  font-size: 22px;
+  letter-spacing: -1px;
+  box-shadow: 0 0 24px var(--brand-glow);
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+.brand-text { line-height: 1.2; }
+.brand-name {
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.4px;
+}
+.brand-sub {
+  font-size: 10.5px;
+  color: var(--text-3);
+  letter-spacing: 1.5px;
+  margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  margin-left: 16px;
+}
+.nav-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text); background: var(--bg-2); }
+.nav-tab.active {
+  color: #000;
+  background: var(--brand);
+}
+
+.search-box {
+  flex: 1;
+  max-width: 480px;
+  margin-left: auto;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 16px 10px 40px;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+.search-input::placeholder { color: var(--text-4); }
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: var(--bg-3);
+  box-shadow: 0 0 0 3px var(--brand-glow);
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+  font-size: 14px;
+}
+
+.emergency-btn {
+  background: var(--sev-severe);
+  border: none;
+  color: white;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+  box-shadow: 0 0 0 1px rgba(208,0,0,0.4);
+}
+.emergency-btn:hover { background: #ef0d0d; transform: translateY(-1px); }
+.emergency-btn::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(255,255,255,0); }
+}
+
+/* ====== MAIN CONTAINER ====== */
+.main {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== VIEW SECTIONS ====== */
+.view { display: none; padding: 36px 0 60px; }
+.view.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   VIEW 1: 대시보드 (홈)
+============================================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  margin-bottom: 44px;
+}
+.hero-main {
+  background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-main::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--brand-glow), transparent 65%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: var(--brand);
+  background: var(--brand-glow);
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.hero-tag::before {
+  content: '●';
+  font-size: 6px;
+}
+.hero-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-desc {
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 580px;
+  position: relative;
+}
+
+.hero-edit-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, rgba(6,214,160,0.12), rgba(6,214,160,0.04));
+  border: 1px solid var(--edit-border);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--text-2);
+  position: relative;
+}
+.hero-edit-notice strong {
+  color: var(--edit);
+  font-weight: 700;
+}
+.hero-edit-icon {
+  width: 22px;
+  height: 22px;
+  background: var(--edit);
+  color: #000;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* 매뉴얼 근거 안내 */
+.hero-source-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(90deg, rgba(255,214,10,0.08), rgba(255,214,10,0.02));
+  border: 1px solid rgba(255,214,10,0.3);
+  border-radius: 10px;
+  position: relative;
+}
+.hero-source-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.hero-source-text {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.65;
+  flex: 1;
+}
+.hero-source-label {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #000;
+  background: var(--brand);
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+.hero-source-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.hero-source-sub {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--text-3);
+  line-height: 1.55;
+}
+
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ====== 실시간 정보 패널 ====== */
+.live-panel {
+  background: linear-gradient(135deg, #1e2a47 0%, #15203a 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.live-panel::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(76,201,240,0.18), transparent 65%);
+  pointer-events: none;
+}
+
+.live-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-3);
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  position: relative;
+}
+.live-dot-anim {
+  width: 6px;
+  height: 6px;
+  background: var(--ok);
+  border-radius: 50%;
+  animation: livePulse 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(6,214,160,0.6); }
+  50% { opacity: 0.5; box-shadow: 0 0 0 5px rgba(6,214,160,0); }
+}
+.live-update {
+  margin-left: auto;
+  color: var(--text-4);
+  font-size: 10px;
+}
+
+.live-main {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 16px;
+  align-items: center;
+  position: relative;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--line);
+  margin-bottom: 14px;
+}
+.live-main::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 22px;
+  left: 50%;
+  width: 1px;
+  background: var(--line);
+}
+
+.live-time-date {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.3px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.live-time-clock {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text);
+  margin: 2px 0;
+}
+.live-time-day {
+  font-size: 12px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.live-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.live-weather-icon {
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 2px 8px rgba(76,201,240,0.4));
+}
+.live-weather-temp {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--text);
+}
+.live-weather-desc {
+  font-size: 11px;
+  color: var(--text-2);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.live-detail {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.live-detail-item {
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 8px 4px;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+}
+.live-detail-item:hover {
+  background: rgba(76,201,240,0.08);
+  border-color: rgba(76,201,240,0.3);
+}
+.live-detail-label {
+  display: block;
+  font-size: 9.5px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+.live-detail-value {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+.live-alert {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: rgba(208,0,0,0.12);
+  border: 1px solid rgba(208,0,0,0.4);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--sev-severe);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.live-alert-icon {
+  font-size: 14px;
+}
+
+/* ====== Mini KPI Grid ====== */
+.kpi-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.kpi-mini {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s;
+}
+.kpi-mini:hover {
+  background: var(--bg-3);
+  border-color: var(--brand);
+}
+.kpi-mini-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.kpi-mini.kpi-1 .kpi-mini-icon { background: rgba(76,201,240,0.12); }
+.kpi-mini.kpi-2 .kpi-mini-icon { background: rgba(239,71,111,0.12); }
+.kpi-mini.kpi-3 .kpi-mini-icon { background: rgba(181,23,158,0.12); }
+.kpi-mini.kpi-4 .kpi-mini-icon { background: rgba(6,214,160,0.12); }
+.kpi-mini-body { flex: 1; min-width: 0; }
+.kpi-mini-label {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.3px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kpi-mini-value {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-top: 1px;
+}
+.kpi-mini-value span {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  margin-left: 2px;
+}
+.kpi-mini-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+.kpi-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.kpi-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.kpi-1 .kpi-icon { background: rgba(76,201,240,0.12); color: var(--cat-natural); }
+.kpi-2 .kpi-icon { background: rgba(239,71,111,0.12); color: var(--cat-social); }
+.kpi-3 .kpi-icon { background: rgba(181,23,158,0.12); color: var(--cat-safety); }
+.kpi-4 .kpi-icon { background: rgba(6,214,160,0.12); color: var(--cat-common); }
+.kpi-body { flex: 1; }
+.kpi-label {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.kpi-value {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-top: 2px;
+}
+.kpi-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* 사용 설명서 */
+.guide-section {
+  background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 32px 36px;
+  margin-bottom: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.guide-section::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -5%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--brand-glow), transparent 70%);
+  pointer-events: none;
+}
+.guide-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.guide-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--brand-glow);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.guide-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.guide-sub {
+  font-size: 12.5px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  position: relative;
+}
+.guide-card {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  transition: all 0.2s;
+  position: relative;
+}
+.guide-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+.guide-card-edit {
+  background: linear-gradient(135deg, rgba(6,214,160,0.08), var(--bg-3));
+  border-color: var(--edit-border);
+}
+.guide-card-edit:hover {
+  border-color: var(--edit);
+}
+.guide-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.guide-card-edit .guide-num {
+  color: var(--edit);
+}
+.guide-card-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.guide-card-body {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+.guide-card-body strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.guide-card-body kbd {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* Quick actions */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 44px;
+}
+.quick-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.quick-card::after {
+  content: '→';
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  color: var(--text-3);
+  font-size: 18px;
+  transition: all 0.2s;
+}
+.quick-card:hover {
+  background: var(--bg-3);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+.quick-card:hover::after { color: var(--brand); transform: translate(4px, 0); }
+.quick-card-icon {
+  font-size: 26px;
+  margin-bottom: 14px;
+  display: block;
+}
+.quick-card-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.quick-card-desc {
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+/* Section */
+.section { margin-bottom: 48px; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.section-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 22px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+.section-action {
+  font-size: 12px;
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  cursor: pointer;
+}
+.section-action:hover { color: var(--brand); }
+
+/* 4단계 시각화 */
+.phase-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.phase-block {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.phase-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--phase-color);
+}
+.phase-block:hover { border-color: var(--phase-color); }
+.phase-block.p1 { --phase-color: var(--phase-1); }
+.phase-block.p2 { --phase-color: var(--phase-2); }
+.phase-block.p3 { --phase-color: var(--phase-3); }
+.phase-block.p4 { --phase-color: var(--phase-4); }
+
+.phase-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--phase-color);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.phase-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.phase-eng {
+  font-size: 11px;
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.phase-def {
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--line);
+}
+.phase-tasks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.phase-tasks li {
+  font-size: 11.5px;
+  color: var(--text-2);
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.5;
+}
+.phase-tasks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--phase-color);
+}
+
+/* ============================================================
+   VIEW 2: 유형별 매뉴얼
+============================================================ */
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.filter-label {
+  font-size: 11px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-right: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.chip {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--text-2);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chip:hover { border-color: var(--text-3); color: var(--text); }
+.chip.active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #000;
+}
+
+/* 카테고리 섹션 */
+.cat-section { margin-bottom: 44px; }
+.cat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 14px 20px;
+  background: linear-gradient(90deg, var(--cat-color-soft) 0%, transparent 70%);
+  border-left: 3px solid var(--cat-color);
+  border-radius: 8px;
+}
+.cat-section.natural { --cat-color: var(--cat-natural); --cat-color-soft: rgba(76,201,240,0.08); }
+.cat-section.social { --cat-color: var(--cat-social); --cat-color-soft: rgba(239,71,111,0.08); }
+.cat-section.safety { --cat-color: var(--cat-safety); --cat-color-soft: rgba(181,23,158,0.08); }
+.cat-section.common { --cat-color: var(--cat-common); --cat-color-soft: rgba(6,214,160,0.08); }
+
+.cat-head-left {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.cat-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cat-color);
+  letter-spacing: 1px;
+}
+.cat-name {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+.cat-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.cat-stats strong { color: var(--text); font-weight: 700; }
+
+/* 유형 카드 */
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+}
+.type-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.type-card:hover {
+  background: var(--bg-3);
+  border-color: var(--cat-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.type-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+.type-name {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.risk-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  background: var(--sev-severe);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+.measure-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--bg);
+  padding: 3px 9px;
+  border-radius: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.type-dept {
+  font-size: 12.5px;
+  color: var(--text-2);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.type-dept-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cat-color);
+  flex-shrink: 0;
+}
+.type-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 11px;
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.type-meta strong { color: var(--text-2); }
+
+/* ============================================================
+   VIEW 3: 비상기구 운영체계
+============================================================ */
+.org-section { margin-bottom: 40px; }
+.org-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 32px;
+  margin-bottom: 20px;
+}
+
+/* 조직도 */
+.org-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+}
+.org-node {
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  padding: 12px 24px;
+  text-align: center;
+  min-width: 200px;
+  position: relative;
+}
+.org-node.lead {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+  color: #000;
+  border: none;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 14px 32px;
+  box-shadow: 0 8px 24px var(--brand-glow);
+}
+.org-role {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 4px;
+}
+.org-node.lead .org-role { color: rgba(0,0,0,0.6); }
+.org-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.org-node.lead .org-title { color: #000; }
+.org-line {
+  width: 2px;
+  height: 20px;
+  background: var(--line-2);
+}
+.org-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 실무반 12기능 */
+.functions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.func-card {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  transition: all 0.15s;
+}
+.func-card:hover { border-color: var(--brand); }
+.func-num {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--brand-glow);
+  color: var(--brand);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.func-name {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+.func-dept {
+  font-size: 11px;
+  color: var(--brand);
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.func-tasks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.func-tasks li {
+  font-size: 11px;
+  color: var(--text-2);
+  padding-left: 8px;
+  position: relative;
+  line-height: 1.5;
+}
+.func-tasks li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--brand);
+  font-weight: 900;
+}
+
+/* 단계별 비상근무 */
+.alert-stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.alert-stage {
+  background: var(--bg-3);
+  padding: 20px;
+  position: relative;
+  border-right: 1px solid var(--line);
+}
+.alert-stage:last-child { border-right: none; }
+.alert-stage::after {
+  content: '→';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  font-size: 16px;
+  z-index: 2;
+  background: var(--bg);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.alert-stage:last-child::after { display: none; }
+.alert-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.alert-stage.s1 .alert-tag { background: rgba(76,201,240,0.15); color: var(--sev-attention); }
+.alert-stage.s2 .alert-tag { background: rgba(255,214,10,0.15); color: var(--sev-caution); }
+.alert-stage.s3 .alert-tag { background: rgba(255,133,0,0.15); color: var(--sev-alert); }
+.alert-stage.s4 .alert-tag { background: rgba(208,0,0,0.15); color: var(--sev-severe); }
+.alert-name {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.alert-desc {
+  font-size: 11px;
+  color: var(--text-2);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.alert-action {
+  font-size: 11px;
+  color: var(--text);
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border-radius: 6px;
+  line-height: 1.4;
+}
+.alert-action strong { color: var(--brand); font-weight: 700; }
+
+/* ============================================================
+   VIEW 4: 비상연락처
+============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.contact-group {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+.contact-group-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contact-group-title::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--brand);
+  border-radius: 50%;
+}
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.contact-item:last-child { border-bottom: none; }
+.contact-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+.contact-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   MODAL (유형 상세)
+============================================================ */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,20,35,0.78);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.modal-bg.active {
+  display: flex;
+  opacity: 1;
+}
+.modal {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  margin: auto;
+}
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  padding: 28px 36px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  z-index: 10;
+}
+.modal-header-content { flex: 1; }
+.modal-cat-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.modal-cat-tag.자연재난 { background: rgba(76,201,240,0.12); color: var(--cat-natural); }
+.modal-cat-tag.사회재난 { background: rgba(239,71,111,0.12); color: var(--cat-social); }
+.modal-cat-tag.안전사고 { background: rgba(181,23,158,0.12); color: var(--cat-safety); }
+.modal-cat-tag.공통 { background: rgba(6,214,160,0.12); color: var(--cat-common); }
+
+.modal-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.modal-summary {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 700px;
+}
+.modal-close {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  color: var(--text);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.modal-close:hover {
+  background: var(--sev-severe);
+  border-color: var(--sev-severe);
+}
+
+.modal-body { padding: 28px 36px 36px; }
+
+/* 핵심정보 카드 */
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.info-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.info-card-label {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.info-card-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.modal-section {
+  margin-bottom: 32px;
+}
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--brand);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-section-title::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--brand);
+}
+
+/* 4단계 매뉴얼 - 모달 */
+.manual-phases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.manual-phase {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.manual-phase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--phase-color);
+}
+.manual-phase.예방 { --phase-color: var(--phase-1); }
+.manual-phase.대비 { --phase-color: var(--phase-2); }
+.manual-phase.대응 { --phase-color: var(--phase-3); }
+.manual-phase.복구 { --phase-color: var(--phase-4); }
+
+.manual-phase-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--phase-color);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.manual-phase-name {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  color: var(--phase-color);
+}
+.manual-phase-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.manual-phase-list li {
+  font-size: 11.5px;
+  color: var(--text-2);
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.55;
+}
+.manual-phase-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--phase-color);
+}
+
+/* 대책 테이블 */
+.measure-table {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.measure-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px 160px;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  font-size: 13px;
+  transition: background 0.1s;
+}
+.measure-row:last-child { border-bottom: none; }
+.measure-row:hover { background: var(--bg-2); }
+.measure-row.header {
+  background: var(--bg-3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 1px;
+}
+.m-num { font-family: 'JetBrains Mono', monospace; color: var(--text-3); font-size: 11px; }
+.m-name { font-weight: 500; }
+.m-phase {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+.m-phase.예방 { background: rgba(0,180,216,0.12); color: var(--phase-1); }
+.m-phase.대비 { background: rgba(249,199,79,0.12); color: var(--phase-2); }
+.m-phase.대응 { background: rgba(249,65,68,0.12); color: var(--phase-3); }
+.m-phase.복구 { background: rgba(6,214,160,0.12); color: var(--phase-4); }
+.m-dept { font-size: 12px; color: var(--text-2); }
+
+/* 법령 */
+.legal-list { display: flex; flex-direction: column; gap: 6px; }
+.legal-pill {
+  background: var(--bg-2);
+  border-left: 3px solid var(--brand);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--text-2);
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+/* 긴급 행동요령 */
+.emergency-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.emerg-step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+.emerg-step-num {
+  background: var(--sev-severe);
+  color: white;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+.emerg-step-body {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+.emerg-step-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.emerg-step-desc {
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+
+/* Empty */
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-3);
+}
+.empty-icon { font-size: 36px; margin-bottom: 14px; opacity: 0.4; }
+.empty-text { font-size: 14px; }
+
+/* Footer */
+.foot {
+  max-width: 1480px;
+  margin: 40px auto 0;
+  padding: 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  color: var(--text-3);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.foot-brand { font-family: 'IBM Plex Sans KR', sans-serif; font-weight: 600; }
+
+/* 반응형 */
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 1fr; }
+  .quick-grid { grid-template-columns: repeat(2, 1fr); }
+  .phase-flow { grid-template-columns: repeat(2, 1fr); }
+  .manual-phases { grid-template-columns: repeat(2, 1fr); }
+  .info-row { grid-template-columns: repeat(2, 1fr); }
+  .alert-stages { grid-template-columns: repeat(2, 1fr); }
+  .alert-stage::after { display: none; }
+  .guide-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .topnav-inner { padding: 12px 16px; flex-wrap: wrap; }
+  .search-box { order: 5; width: 100%; max-width: none; margin: 8px 0 0; }
+  .main { padding: 0 16px; }
+  .hero-title { font-size: 30px; }
+  .quick-grid { grid-template-columns: 1fr; }
+  .nav-tabs { overflow-x: auto; }
+  .measure-row { grid-template-columns: 1fr; gap: 4px; }
+  .guide-grid { grid-template-columns: 1fr; }
+  .guide-section { padding: 24px 20px; }
+  .live-detail { grid-template-columns: repeat(2, 1fr); }
+  .kpi-mini-grid { grid-template-columns: 1fr; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-4); }
+</style>
+</head>
+<body>
+
+<!-- 상단 -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand" onclick="switchView('dashboard')">
+      <div class="brand-logo">H</div>
+      <div class="brand-text">
+        <div class="brand-name">화성시 안전관리 매뉴얼</div>
+        <div class="brand-sub">HWASEONG · SAFETY · 2026</div>
+      </div>
+    </div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-view="dashboard">대시보드</button>
+      <button class="nav-tab" data-view="manual">유형별 매뉴얼</button>
+      <button class="nav-tab" data-view="org">비상기구 운영</button>
+      <button class="nav-tab" data-view="contact">비상연락처</button>
+    </div>
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input class="search-input" id="searchInput" placeholder="유형·부서·법령·대책 검색 (Ctrl+K)">
+    </div>
+    <button class="edit-toggle" id="editToggle" onclick="toggleEditMode()">편집 모드</button>
+    <button class="emergency-btn" onclick="emergencyMode()">긴급상황 발생</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- 편집 모드 안내 배너 -->
+<div class="edit-banner">
+  <span class="edit-banner-icon">✎</span>
+  <div class="edit-banner-text">
+    <strong>편집 모드 활성</strong> · 대시보드 제목·설명·KPI·4단계 정의·사용설명서 등 <strong style="color:var(--brand);">모든 텍스트</strong>를 클릭하여 직접 수정 가능 · × 버튼으로 삭제 / + 버튼으로 추가 · 변경사항은 브라우저에 자동 저장됩니다
+  </div>
+  <div class="edit-banner-actions">
+    <button class="edit-action-btn primary" onclick="exportData()">📥 데이터 내보내기 (JSON)</button>
+    <button class="edit-action-btn" onclick="importData()">📤 데이터 가져오기</button>
+    <button class="edit-action-btn danger" onclick="resetData()">초기화</button>
+  </div>
+</div>
+
+<input type="file" id="importFile" accept=".json" style="display:none;">
+
+<!-- =============================================== -->
+<!-- VIEW 1: 대시보드                                  -->
+<!-- =============================================== -->
+<section class="view active" id="view-dashboard">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-main">
+      <div class="hero-tag dash-edit" data-dash-key="hero.tag">2026 OFFICIAL MANUAL</div>
+      <h1 class="hero-title">
+        <em class="dash-edit" data-dash-key="hero.title">화성시 안전관리 매뉴얼</em>
+      </h1>
+      <p class="hero-desc dash-edit" data-dash-key="hero.desc" data-multiline="true">화성시 전 공무원이 사용하는 재난·안전사고 통합 대응 매뉴얼입니다. 예방·대비·대응·복구 4단계 행동요령, 수습 주관부서, 비상기구 운영체계, 13개 협업기능, 비상연락망을 통합 제공합니다.</p>
+      <div class="hero-edit-notice">
+        <span class="hero-edit-icon">✎</span>
+        <span class="dash-edit" data-dash-key="hero.editNotice" data-multiline="true">우측 상단 「편집 모드」 버튼 클릭 시 부서명·연락처·대책 등 모든 정보 수정·추가·삭제 가능</span>
+      </div>
+      <div class="hero-source-notice">
+        <span class="hero-source-icon">📖</span>
+        <div class="hero-source-text">
+          <span class="hero-source-label">근거</span>
+          <span class="dash-edit" data-dash-key="hero.sourceMain"><strong>「2026년 화성시 안전관리계획」</strong> (’26.2. / 화성시 안전건설실)</span><br>
+          <span class="hero-source-sub dash-edit" data-dash-key="hero.sourceSub" data-multiline="true">상위 법령 — 「재난 및 안전관리 기본법」 제24조, 동 시행령 제29조, 행정안전부고시 제2025-80호(’25.12.26.)</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <!-- 실시간 정보 패널 -->
+      <div class="live-panel">
+        <div class="live-panel-head">
+          <span class="live-dot-anim"></span>
+          <span>화성시 실시간 정보</span>
+          <span class="live-update" id="liveUpdate">--:--:--</span>
+        </div>
+        <div class="live-main">
+          <div class="live-time">
+            <div class="live-time-date" id="liveDate">2026년 -월 -일</div>
+            <div class="live-time-clock" id="liveClock">--:--</div>
+            <div class="live-time-day" id="liveDay">-요일</div>
+          </div>
+          <div class="live-weather">
+            <div class="live-weather-icon" id="weatherIcon">☀</div>
+            <div class="live-weather-temp" id="weatherTemp">--°</div>
+            <div class="live-weather-desc" id="weatherDesc">로딩 중...</div>
+          </div>
+        </div>
+        <div class="live-detail">
+          <div class="live-detail-item">
+            <span class="live-detail-label">체감</span>
+            <span class="live-detail-value" id="weatherFeel">--°</span>
+          </div>
+          <div class="live-detail-item">
+            <span class="live-detail-label">습도</span>
+            <span class="live-detail-value" id="weatherHumidity">--%</span>
+          </div>
+          <div class="live-detail-item">
+            <span class="live-detail-label">바람</span>
+            <span class="live-detail-value" id="weatherWind">-- m/s</span>
+          </div>
+          <div class="live-detail-item">
+            <span class="live-detail-label">강수</span>
+            <span class="live-detail-value" id="weatherRain">-- mm</span>
+          </div>
+        </div>
+        <div class="live-alert" id="weatherAlert" style="display:none;">
+          <span class="live-alert-icon">⚠</span>
+          <span class="live-alert-text">기상특보 확인 필요</span>
+        </div>
+      </div>
+
+      <!-- KPI 카드 (간소화 2x2 그리드) -->
+      <div class="kpi-mini-grid">
+        <div class="kpi-mini kpi-1">
+          <div class="kpi-mini-icon">⛅</div>
+          <div class="kpi-mini-body">
+            <div class="kpi-mini-label dash-edit" data-dash-key="kpi.1.label">자연재난</div>
+            <div class="kpi-mini-value"><span class="dash-edit" data-dash-key="kpi.1.value">9</span> <span>유형</span></div>
+            <div class="kpi-mini-meta dash-edit" data-dash-key="kpi.1.meta">54 대책</div>
+          </div>
+        </div>
+        <div class="kpi-mini kpi-2">
+          <div class="kpi-mini-icon">🏙</div>
+          <div class="kpi-mini-body">
+            <div class="kpi-mini-label dash-edit" data-dash-key="kpi.2.label">사회재난</div>
+            <div class="kpi-mini-value"><span class="dash-edit" data-dash-key="kpi.2.value">33</span> <span>유형</span></div>
+            <div class="kpi-mini-meta dash-edit" data-dash-key="kpi.2.meta">121 대책</div>
+          </div>
+        </div>
+        <div class="kpi-mini kpi-3">
+          <div class="kpi-mini-icon">⚠</div>
+          <div class="kpi-mini-body">
+            <div class="kpi-mini-label dash-edit" data-dash-key="kpi.3.label">안전사고</div>
+            <div class="kpi-mini-value"><span class="dash-edit" data-dash-key="kpi.3.value">10</span> <span>유형</span></div>
+            <div class="kpi-mini-meta dash-edit" data-dash-key="kpi.3.meta">55 대책</div>
+          </div>
+        </div>
+        <div class="kpi-mini kpi-4">
+          <div class="kpi-mini-icon">🚑</div>
+          <div class="kpi-mini-body">
+            <div class="kpi-mini-label dash-edit" data-dash-key="kpi.4.label">공통</div>
+            <div class="kpi-mini-value"><span class="dash-edit" data-dash-key="kpi.4.value">5</span> <span>유형</span></div>
+            <div class="kpi-mini-meta dash-edit" data-dash-key="kpi.4.meta">52 대책</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-grid">
+    <div class="quick-card" onclick="switchView('manual')">
+      <span class="quick-card-icon">📋</span>
+      <div class="quick-card-title dash-edit" data-dash-key="quick.1.title">유형별 대응 매뉴얼</div>
+      <div class="quick-card-desc dash-edit" data-dash-key="quick.1.desc" data-multiline="true">재난·사고 유형별 4단계 행동요령과 세부대책</div>
+    </div>
+    <div class="quick-card" onclick="switchView('org')">
+      <span class="quick-card-icon">🏛</span>
+      <div class="quick-card-title dash-edit" data-dash-key="quick.2.title">비상기구 운영체계</div>
+      <div class="quick-card-desc dash-edit" data-dash-key="quick.2.desc" data-multiline="true">재난안전대책본부 13개 협업기능과 단계별 비상근무</div>
+    </div>
+    <div class="quick-card" onclick="switchView('contact')">
+      <span class="quick-card-icon">📞</span>
+      <div class="quick-card-title dash-edit" data-dash-key="quick.3.title">비상연락망</div>
+      <div class="quick-card-desc dash-edit" data-dash-key="quick.3.desc" data-multiline="true">유관기관·재난관리책임기관 비상연락처</div>
+    </div>
+    <div class="quick-card" onclick="emergencyMode()">
+      <span class="quick-card-icon">🚨</span>
+      <div class="quick-card-title dash-edit" data-dash-key="quick.4.title">긴급상황 대응절차</div>
+      <div class="quick-card-desc dash-edit" data-dash-key="quick.4.desc" data-multiline="true">재난발생 시 즉시 적용 4단계 표준절차</div>
+    </div>
+  </div>
+
+  <!-- 재난관리 4단계 표준 -->
+  <div class="section">
+    <div class="section-head">
+      <h2 class="section-title dash-edit" data-dash-key="frame.sectionTitle">재난관리 4단계 표준 프레임워크</h2>
+      <span class="section-action dash-edit" data-dash-key="frame.sectionAction">「재난안전법」 제25조의4 ~ 제66조의4 기반</span>
+    </div>
+    <div class="phase-flow">
+      <div class="phase-block p1">
+        <div class="phase-num dash-edit" data-dash-key="frame.p1.num">PHASE 01</div>
+        <div class="phase-title dash-edit" data-dash-key="frame.p1.title">예방</div>
+        <div class="phase-eng dash-edit" data-dash-key="frame.p1.eng">PREVENTION</div>
+        <div class="phase-def dash-edit" data-dash-key="frame.p1.def" data-multiline="true">재난발생의 원인을 원천적으로 제거하거나, 발생 시 위험도를 줄이기 위한 예방·경감활동</div>
+        <ul class="phase-tasks">
+          <li class="dash-edit" data-dash-key="frame.p1.task.0">조직 구성 / 규정·제도 개선·정비</li>
+          <li class="dash-edit" data-dash-key="frame.p1.task.1">재난위험요소 조사·분석</li>
+          <li class="dash-edit" data-dash-key="frame.p1.task.2">교육·훈련·홍보</li>
+          <li class="dash-edit" data-dash-key="frame.p1.task.3">재난취약지역·시설 유지관리·점검</li>
+          <li class="dash-edit" data-dash-key="frame.p1.task.4">운영연속성 확보 (BCP)</li>
+        </ul>
+      </div>
+      <div class="phase-block p2">
+        <div class="phase-num dash-edit" data-dash-key="frame.p2.num">PHASE 02</div>
+        <div class="phase-title dash-edit" data-dash-key="frame.p2.title">대비</div>
+        <div class="phase-eng dash-edit" data-dash-key="frame.p2.eng">PREPAREDNESS</div>
+        <div class="phase-def dash-edit" data-dash-key="frame.p2.def" data-multiline="true">실제 재난이 발생한 위기상황에서 적절한 대응을 위해 수행해야 할 제반사항을 사전에 준비</div>
+        <ul class="phase-tasks">
+          <li class="dash-edit" data-dash-key="frame.p2.task.0">예·경보, 모니터링 시스템 구축</li>
+          <li class="dash-edit" data-dash-key="frame.p2.task.1">장비·물자·시설·인력 확충</li>
+          <li class="dash-edit" data-dash-key="frame.p2.task.2">규정·제도 개선·정비</li>
+          <li class="dash-edit" data-dash-key="frame.p2.task.3">교육·훈련</li>
+          <li class="dash-edit" data-dash-key="frame.p2.task.4">기능별 재난대응 활동계획 수립·점검</li>
+        </ul>
+      </div>
+      <div class="phase-block p3">
+        <div class="phase-num dash-edit" data-dash-key="frame.p3.num">PHASE 03</div>
+        <div class="phase-title dash-edit" data-dash-key="frame.p3.title">대응</div>
+        <div class="phase-eng dash-edit" data-dash-key="frame.p3.eng">RESPONSE</div>
+        <div class="phase-def dash-edit" data-dash-key="frame.p3.def" data-multiline="true">재난발생 또는 발생이 임박한 상황에서 국민의 생명·신체·재산을 보호하기 위한 활동</div>
+        <ul class="phase-tasks">
+          <li class="dash-edit" data-dash-key="frame.p3.task.0">재난상황관리 / 긴급생활안정 지원</li>
+          <li class="dash-edit" data-dash-key="frame.p3.task.1">긴급통신 / 시설피해 응급복구</li>
+          <li class="dash-edit" data-dash-key="frame.p3.task.2">교통대책 운영 / 의료·방역</li>
+          <li class="dash-edit" data-dash-key="frame.p3.task.3">재난현장 환경 정비 / 자원봉사</li>
+          <li class="dash-edit" data-dash-key="frame.p3.task.4">사회질서 유지 / 수색·구조·구급</li>
+        </ul>
+      </div>
+      <div class="phase-block p4">
+        <div class="phase-num dash-edit" data-dash-key="frame.p4.num">PHASE 04</div>
+        <div class="phase-title dash-edit" data-dash-key="frame.p4.title">복구</div>
+        <div class="phase-eng dash-edit" data-dash-key="frame.p4.eng">RECOVERY</div>
+        <div class="phase-def dash-edit" data-dash-key="frame.p4.def" data-multiline="true">도로·항만·시설물 등 물리적 피해를 재난발생 이전 상태로 원상복구 또는 회복시키는 활동</div>
+        <ul class="phase-tasks">
+          <li class="dash-edit" data-dash-key="frame.p4.task.0">피해상황·사고원인 조사</li>
+          <li class="dash-edit" data-dash-key="frame.p4.task.1">복구계획 수립 / 시설복구</li>
+          <li class="dash-edit" data-dash-key="frame.p4.task.2">피해주민 지원·구호 / 사상자 치료</li>
+          <li class="dash-edit" data-dash-key="frame.p4.task.3">특별재난지역 선포</li>
+          <li class="dash-edit" data-dash-key="frame.p4.task.4">평가 및 사고재발대책 마련</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 재난대응 4단계 절차 -->
+  <div class="section">
+    <div class="section-head">
+      <h2 class="section-title dash-edit" data-dash-key="stage.sectionTitle">재난대응 단계별 추진절차</h2>
+      <span class="section-action dash-edit" data-dash-key="stage.sectionAction">현장조치 행동매뉴얼 기준</span>
+    </div>
+    <div class="alert-stages">
+      <div class="alert-stage s1">
+        <span class="alert-tag dash-edit" data-dash-key="stage.s1.tag">STAGE 01</span>
+        <div class="alert-name dash-edit" data-dash-key="stage.s1.name">징후감지</div>
+        <div class="alert-desc dash-edit" data-dash-key="stage.s1.desc" data-multiline="true">재난·사고 발생 가능성 증가에 따른 감시활동 강화</div>
+        <div class="alert-action dash-edit" data-dash-key="stage.s1.action" data-multiline="true"><strong>위기경보:</strong> 관심<br>긴급안전점검 / 비상연락체계 구축</div>
+      </div>
+      <div class="alert-stage s2">
+        <span class="alert-tag dash-edit" data-dash-key="stage.s2.tag">STAGE 02</span>
+        <div class="alert-name dash-edit" data-dash-key="stage.s2.name">초기대응</div>
+        <div class="alert-desc dash-edit" data-dash-key="stage.s2.desc" data-multiline="true">상황판단회의를 통해 비상기구 설치 여부 결정</div>
+        <div class="alert-action dash-edit" data-dash-key="stage.s2.action" data-multiline="true"><strong>위기경보:</strong> 주의·경계<br>신속한 초동조치 / 주민대피 / 2차 피해 방지</div>
+      </div>
+      <div class="alert-stage s3">
+        <span class="alert-tag dash-edit" data-dash-key="stage.s3.tag">STAGE 03</span>
+        <div class="alert-name dash-edit" data-dash-key="stage.s3.name">비상대응</div>
+        <div class="alert-desc dash-edit" data-dash-key="stage.s3.desc" data-multiline="true">비상기구 설치·운영 본격 재난대응</div>
+        <div class="alert-action dash-edit" data-dash-key="stage.s3.action" data-multiline="true"><strong>위기경보:</strong> 경계·심각<br>인명 구조·구급 최우선 / 지역재난안전대책본부 가동</div>
+      </div>
+      <div class="alert-stage s4">
+        <span class="alert-tag dash-edit" data-dash-key="stage.s4.tag">STAGE 04</span>
+        <div class="alert-name dash-edit" data-dash-key="stage.s4.name">수습·복구</div>
+        <div class="alert-desc dash-edit" data-dash-key="stage.s4.desc" data-multiline="true">긴급구조 완료 후 주민 일상회복</div>
+        <div class="alert-action dash-edit" data-dash-key="stage.s4.action" data-multiline="true"><strong>위기경보:</strong> 경계·심각<br>Life-Line 복구 최우선 / 장기 이재민 대책</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사용 설명서 -->
+  <div class="guide-section">
+    <div class="guide-head">
+      <div class="guide-icon">📖</div>
+      <div>
+        <div class="guide-title dash-edit" data-dash-key="guide.title">사용 설명서</div>
+        <div class="guide-sub dash-edit" data-dash-key="guide.sub">처음 사용하시는 경우 아래 안내를 먼저 확인해 주세요</div>
+      </div>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-num">01</div>
+        <div class="guide-card-title dash-edit" data-dash-key="guide.1.title">근거</div>
+        <div class="guide-card-body dash-edit" data-dash-key="guide.1.body" data-multiline="true"><strong>2026년 화성시 안전관리계획</strong>(’26.2. / 화성시 안전건설실)에 근거하여 제작되었습니다.
+          <br><br>
+          상위 법령: 「재난 및 안전관리 기본법」 제24조(시·도 안전관리계획 수립), 동 시행령 제29조(시·군·구 안전관리계획), 행정안전부고시 제2025-80호(’25.12.26.)</div>
+        </div>
+      <div class="guide-card">
+        <div class="guide-num">02</div>
+        <div class="guide-card-title dash-edit" data-dash-key="guide.2.title">메뉴 구성</div>
+        <div class="guide-card-body dash-edit" data-dash-key="guide.2.body" data-multiline="true">상단 탭으로 4개 화면 전환이 가능합니다.
+          <br><br>
+          <strong>① 대시보드</strong> — 4단계 표준 프레임워크 / 단계별 추진절차<br>
+          <strong>② 유형별 매뉴얼</strong> — 57개 재난·사고 유형 상세<br>
+          <strong>③ 비상기구 운영</strong> — 대책본부·13개 협업기능<br>
+          <strong>④ 비상연락처</strong> — 유관기관 연락망</div>
+        </div>
+      <div class="guide-card">
+        <div class="guide-num">03</div>
+        <div class="guide-card-title dash-edit" data-dash-key="guide.3.title">검색 방법</div>
+        <div class="guide-card-body dash-edit" data-dash-key="guide.3.body" data-multiline="true">상단 검색창에 키워드를 입력하면 유형명·부서명·법령·대책명을 동시에 검색합니다.
+          <br><br>
+          단축키 <kbd>Ctrl</kbd> + <kbd>K</kbd> 사용 시 어디서나 즉시 검색창으로 이동합니다.
+          유형 카드 클릭 시 상세 모달이 열립니다.</div>
+        </div>
+      <div class="guide-card guide-card-edit">
+        <div class="guide-num">04</div>
+        <div class="guide-card-title dash-edit" data-dash-key="guide.4.title">편집 모드 사용법</div>
+        <div class="guide-card-body dash-edit" data-dash-key="guide.4.body" data-multiline="true">우측 상단 <strong>「편집 모드」</strong> 버튼 클릭 시 모든 정보를 수정할 수 있습니다.
+          <br><br>
+          ▸ <strong>수정</strong> — 노란 점선 영역 클릭하여 직접 입력<br>
+          ▸ <strong>추가</strong> — "+ 항목 추가" 버튼으로 유형·대책·법령·연락처 추가<br>
+          ▸ <strong>삭제</strong> — 각 항목 우측 × 버튼<br>
+          ▸ <strong>자동 저장</strong> — 모든 변경사항은 브라우저에 자동 저장됨<br>
+          ▸ <strong>백업·복구</strong> — JSON 파일 내보내기/가져오기로 백업 가능</div>
+        </div>
+      <div class="guide-card">
+        <div class="guide-num">05</div>
+        <div class="guide-card-title dash-edit" data-dash-key="guide.5.title">유의사항</div>
+        <div class="guide-card-body dash-edit" data-dash-key="guide.5.body" data-multiline="true">본 플랫폼은 안전관리계획의 핵심 정보를 정리한 <strong>참조용 자료</strong>입니다.
+          <br><br>
+          상세 통계·세부 추진계획·정확한 수치는 반드시 <strong>안전관리계획 본문 원문</strong>을 확인해 주세요. 변동사항 발생 시 안전건설실 안전정책과로 즉시 통보해야 합니다.</div>
+        </div>
+      <div class="guide-card">
+        <div class="guide-num">06</div>
+        <div class="guide-card-title dash-edit" data-dash-key="guide.6.title">긴급상황 발생 시</div>
+        <div class="guide-card-body dash-edit" data-dash-key="guide.6.body" data-multiline="true">우측 상단 <strong>「긴급상황 발생」</strong> 버튼 클릭 시 유형별 매뉴얼 검색 화면으로 즉시 이동합니다.
+          <br><br>
+          ① 해당 재난 유형 검색 → ② 카드 클릭 → ③ <strong>"사고 발생 시 즉시 조치 절차"</strong> 5단계 표준 절차 확인</div>
+        </div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- =============================================== -->
+<!-- VIEW 2: 유형별 매뉴얼                              -->
+<!-- =============================================== -->
+<section class="view" id="view-manual">
+
+  <div class="section-head">
+    <h2 class="section-title">재난·안전사고 유형별 대응 매뉴얼</h2>
+    <span class="section-action">카드 클릭 → 4단계 행동요령 상세 확인</span>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-label">분야 필터</span>
+    <button class="chip active" data-filter="전체">전체 (57)</button>
+    <button class="chip" data-filter="자연재난">자연재난 (9)</button>
+    <button class="chip" data-filter="사회재난">사회재난 (20)</button>
+    <button class="chip" data-filter="안전사고">안전사고 (10)</button>
+    <button class="chip" data-filter="공통">공통 (18)</button>
+  </div>
+
+  <div id="manualContent"></div>
+</section>
+
+<!-- =============================================== -->
+<!-- VIEW 3: 비상기구 운영체계                          -->
+<!-- =============================================== -->
+<section class="view" id="view-org">
+
+  <div class="section-head">
+    <h2 class="section-title">화성시 지역재난안전대책본부 구성</h2>
+    <span class="section-action">「재난 및 안전관리 기본법」 제16조</span>
+  </div>
+
+  <div class="org-card">
+    <div class="org-chart">
+      <div class="org-node lead">
+        <div class="org-role">본부장</div>
+        <div class="org-title">화성특례시장</div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-node">
+        <div class="org-role">차장</div>
+        <div class="org-title">부시장</div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-row">
+        <div class="org-node">
+          <div class="org-role">대변인</div>
+          <div class="org-title">언론담당관</div>
+        </div>
+        <div class="org-node">
+          <div class="org-role">통제관</div>
+          <div class="org-title">실·국장급</div>
+        </div>
+        <div class="org-node">
+          <div class="org-role">담당관</div>
+          <div class="org-title">재난유형 담당과장</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:40px;">
+    <h2 class="section-title">13개 협업기능 · 실무반 임무</h2>
+    <span class="section-action">재난상황에 따라 탄력적 편성·운영</span>
+  </div>
+
+  <div class="functions-grid" id="functionsGrid"></div>
+
+  <div class="section-head" style="margin-top:40px;">
+    <h2 class="section-title">단계별 비상근무 체계</h2>
+    <span class="section-action">읍·면·동: 1단계 2명 → 2단계 3명 → 3단계 4명</span>
+  </div>
+
+  <div class="alert-stages">
+    <div class="alert-stage s1">
+      <span class="alert-tag">LEVEL 01</span>
+      <div class="alert-name">보강단계</div>
+      <div class="alert-desc">예비특보 발효 / 사전대비 단계</div>
+      <div class="alert-action"><strong>편성(여름철):</strong> 12명 / 9개 부서<br>상황관리총괄반 4명 + 협업기능반 7명</div>
+    </div>
+    <div class="alert-stage s2">
+      <span class="alert-tag">LEVEL 02</span>
+      <div class="alert-name">비상 1단계</div>
+      <div class="alert-desc">주의보(호우) / 예비특보(태풍) 발효</div>
+      <div class="alert-action"><strong>편성(여름철):</strong> 35명 / 31개 부서<br>상황관리총괄반 6명 + 협업기능반 29명</div>
+    </div>
+    <div class="alert-stage s3">
+      <span class="alert-tag">LEVEL 03</span>
+      <div class="alert-name">비상 2단계</div>
+      <div class="alert-desc">경보(호우) / 주의보·경보(태풍) 발효</div>
+      <div class="alert-action"><strong>편성(여름철):</strong> 73명 / 51개 부서<br>상황관리총괄반 8명 + 협업기능반 65명</div>
+    </div>
+    <div class="alert-stage s4">
+      <span class="alert-tag">LEVEL 04</span>
+      <div class="alert-name">비상 3단계</div>
+      <div class="alert-desc">재해발생 / 본부장 판단 시</div>
+      <div class="alert-action"><strong>편성(여름철):</strong> 80명 / 51개 부서<br>상황관리총괄반 10명 + 협업기능반 70명</div>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:40px;">
+    <h2 class="section-title">재난현장통합지원본부 구성</h2>
+    <span class="section-action">현장 대응·수습 지휘체계</span>
+  </div>
+
+  <div class="org-card">
+    <div class="org-chart">
+      <div class="org-node lead">
+        <div class="org-role">통합지원본부장</div>
+        <div class="org-title">재난유형별 주관 부시장</div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-row">
+        <div class="org-node">
+          <div class="org-role">공보관</div>
+          <div class="org-title">홍보·미디어</div>
+        </div>
+        <div class="org-node">
+          <div class="org-role">연락관</div>
+          <div class="org-title">군·경·유관기관 협업</div>
+        </div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-row">
+        <div class="org-node">
+          <div class="org-role">상황총괄</div>
+          <div class="org-title">상황·피해조사·전문자문</div>
+        </div>
+        <div class="org-node">
+          <div class="org-role">현장대응</div>
+          <div class="org-title">응급복구·의료·환경·질서</div>
+        </div>
+        <div class="org-node">
+          <div class="org-role">자원지원</div>
+          <div class="org-title">통신·자원·교통·자원봉사</div>
+        </div>
+        <div class="org-node">
+          <div class="org-role">대민지원</div>
+          <div class="org-title">이재민구호·장례</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- VIEW 4: 비상연락처                                -->
+<!-- =============================================== -->
+<section class="view" id="view-contact">
+
+  <div class="section-head">
+    <h2 class="section-title">유관기관 비상연락망</h2>
+    <span class="section-action">2026년 화성시 안전관리계획 부록 기준</span>
+  </div>
+
+  <div class="contact-grid" id="contactGrid"></div>
+
+</section>
+
+</main>
+
+<!-- 모달 -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer class="foot">
+  <div class="foot-brand">© 2026 화성시 안전건설실 안전정책과 · 재난대응과</div>
+  <div style="text-align:right;font-size:11px;line-height:1.6;">
+    본 플랫폼은 2026년 화성시 안전관리계획의 핵심 정보를 정리한 참조용 자료입니다.<br>
+    <strong style="color:var(--brand);">상세 통계·세부 추진계획·정확한 수치는 반드시 안전관리계획 본문 원문을 확인하시기 바랍니다.</strong><br>
+    변동사항 발생 시 → 안전건설실 안전정책과 즉시 통보 (재난안전법 행정사항)
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// DATA · 2026년 화성시 안전관리계획 (원문 기반)
+// ============================================================
+
+// 13개 협업기능 (PDF 원문 「재난 및 안전관리 기본법」 제34조의4 기준)
+const FUNCTIONS = [
+  { num: "01", name: "재난상황관리", dept: "재난대응과", tasks: ["기상정보 등 상황수집·전파", "긴급상황 등 재난방송 요청", "재난문자방송서비스 송출 요청", "일일상황보고서 작성·보고 및 상황일지 작성", "인명·재산 피해상황 관리", "상황판단회의 개최 및 대처계획 수립·보고"] },
+  { num: "02", name: "긴급생활안정지원", dept: "복지정책과·위생정책과", tasks: ["재난지원금 및 생활안정지원 상황 관리·지급 독려", "이재민 발생상황 파악·관리(수용·급식 등)", "재해구호물자 확보·비축상황 관리 및 신속 지원", "사망·실종자 유족 대책, 응급생계구호 실시"] },
+  { num: "03", name: "긴급통신지원", dept: "정보통신과", tasks: ["통신기반시설 피해 및 긴급 복구상황 파악", "통신시설 인프라 긴급복구 지원", "통신 두절지역 이동통신 시설 설치 등 긴급통신체계 구축", "관할 지역 재난현장 복구현황 파악"] },
+  { num: "04", name: "시설피해 응급복구", dept: "건설과·도로과 등 시설소관부서", tasks: ["공공·사유 시설 피해 및 응급복구 상황 파악", "공공·사유 시설 응급복구 인력·장비·자재 등 지원", "각 부서 현황 파악"] },
+  { num: "05", name: "에너지공급 피해시설 기능복구", dept: "신재생에너지과", tasks: ["주민생활 밀착형 시설(가스·전기·유류시설 등) 피해 및 긴급복구 상황 파악", "시설 긴급복구 위한 인력·장비·자재 등 지원", "가스·전기·유류시설 등 피해시설 기능회복 지원"] },
+  { num: "06", name: "재난관리자원지원", dept: "재난대응과", tasks: ["재난관리자원 공동활용시스템(DRSS) 운영·가동", "피해상황에 따른 민간자원 응원", "장비·자재 부족지역 파악 및 지원활동 전개", "재난관리자원의 비축·응원·사용현황 파악 관리"] },
+  { num: "07", name: "교통대책", dept: "교통정책과·대중교통과", tasks: ["재난발생지역 육상·해상·항공 통제현황 파악", "육상·해상·항공 통제상황 모니터링", "연안여객선·유도선 운항 통제 실시", "해상·항공분야 긴급수송 지원", "통행재개 및 소통대책 지원"] },
+  { num: "08", name: "의료·방역지원", dept: "보건정책과·보건행정과", tasks: ["재난발생지역 의료·방역 서비스 제공 현황 파악", "의료·방역 자원배분 현황 파악 및 조정 지원", "부상자 의료지원 및 기동의료반 편성·운영", "침수지역·이재민 집단급식소 위생관리 지도", "감염병 예방 방역소독 및 기동방역반 편성·운영"] },
+  { num: "09", name: "재난현장환경정비", dept: "자원순환과·환경지도과", tasks: ["육상·해상의 환경오염물질(재난폐기물·위험물 등) 피해 및 처리실태 관리", "환경오염물질 처리 위한 인력·장비·자재 등 지원", "재난쓰레기 수거처리 및 임시 적환장 설치·운영 지도"] },
+  { num: "10", name: "자원봉사관리", dept: "소통자치과·시민협력과", tasks: ["통합자원봉사지원단 구성·운영 및 지원", "자원봉사자 투입 현황 및 소요자원 확인", "사유시설 응급복구 등 대민지원활동 추진", "피해가구 안전점검 등 전문 자원봉사활동 지원"] },
+  { num: "11", name: "사회질서유지", dept: "화성서부·동탄경찰서", tasks: ["재난발생지역 육상교통통제 및 두절지역 파악", "재난발생지역 출입제한 및 차량운행통제 실시", "지역주민 불편 최소화 위한 우회도로 홍보", "주민대피·범죄예방 사전조치", "고립지역 긴급수송로 개설 및 수송차량 확보·지원"] },
+  { num: "12", name: "수색·구조·구급", dept: "화성소방서", tasks: ["재난지역 인명 수색·구조·구급 상황 파악·지원", "사상자 응급조치 및 의료기관 후송·안치 지원", "재난현장 특성, 2차 피해 발생 여부 등 정보 제공", "현장 응급의료소 설치·운영 지원", "군부대 등 수색·구조활동 업무협조 및 지원"] },
+  { num: "13", name: "재난수습홍보", dept: "홍보담당관·언론담당관", tasks: ["재난상황별 국민행동요령 홍보", "TV·라디오·케이블TV 등 매체 활용 재난 예·경보 실시사항 전파", "재난 관련 보도자료 취합·배포", "언론발표 준비·실시 및 언론사 인터뷰 실시", "취재지원센터 운영(언론 연락체계·취재지원)", "SNS·홈페이지 등 온라인 홍보 및 모니터링", "오보·유언비어 확인 및 대응"] }
+];
+
+// 비상연락처 데이터
+const CONTACTS = [
+  { title: "화성시 당직실", items: [
+    { name: "화성시청 당직실", num: "031-5189-2222" },
+    { name: "만세구청 당직실", num: "031-5189-3000" },
+    { name: "효행구청 당직실", num: "031-5189-6000" },
+    { name: "병점구청 당직실", num: "031-5189-4333" },
+    { name: "동탄구청 당직실", num: "031-5189-5666" },
+    { name: "맑은물사업소 당직실", num: "031-5189-6277" }
+  ]},
+  { title: "소방서 상황실", items: [
+    { name: "화성소방서 (서부 통합)", num: "031-8012-6435" },
+    { name: "화성소방서 (서부)", num: "031-8936-9005" },
+    { name: "화성소방서 (동부·동탄)", num: "031-8012-6277" },
+    { name: "화성소방서 (동부 보조)", num: "031-8012-6274" },
+    { name: "경기소방재난본부 상황실", num: "031-230-6628" }
+  ]},
+  { title: "경찰서 상황실", items: [
+    { name: "화성서부경찰서", num: "031-379-9329" },
+    { name: "화성서부경찰서 (보조)", num: "031-379-9242" },
+    { name: "화성동탄경찰서", num: "031-639-1329" },
+    { name: "화성동탄경찰서 (보조)", num: "031-639-1342" },
+    { name: "평택해양경찰서", num: "031-8046-2342" }
+  ]},
+  { title: "한국전력공사", items: [
+    { name: "화성지사 (마도·남양·봉담·매송·비봉·송산·서신·새솔)", num: "031-369-1269" },
+    { name: "서수원지사 (병점·화산·반월·진안·기배·동탄1~3동)", num: "031-228-9268" },
+    { name: "오산지사 (향남·양감·정남·동탄4~9동)", num: "031-370-2268" },
+    { name: "서평택지사 (우정·팔탄·장안)", num: "031-8054-6268" }
+  ]},
+  { title: "고속도로 관리", items: [
+    { name: "한국도로공사 화성지사", num: "02-2084-1400" },
+    { name: "한국도로공사 수원지사 (경부)", num: "02-2084-1500" },
+    { name: "경기고속도로공사 (제2순환·평택파주)", num: "070-8031-2721" },
+    { name: "㈜제2서해안고속도로 (평택~시흥)", num: "070-4694-6465" },
+    { name: "한국가스공사 경기지역본부", num: "031-400-7315" }
+  ]},
+  { title: "인접 시·군 재난안전상황실", items: [
+    { name: "수원시청", num: "031-5191-2119" },
+    { name: "평택시청", num: "031-8024-4949" },
+    { name: "오산시청", num: "031-8036-7119" },
+    { name: "시흥시청", num: "031-310-2119" },
+    { name: "용인시청", num: "031-6193-4949" },
+    { name: "안산시청", num: "031-481-2162" }
+  ]},
+  { title: "군부대 / 교육", items: [
+    { name: "육군 제2819부대 2대대", num: "031-356-8113" },
+    { name: "화성오산교육지원청", num: "상황실" }
+  ]},
+  { title: "재난관리책임기관", items: [
+    { name: "화성도시공사 재난안전부", num: "031-8059-4524" },
+    { name: "화성도시고속도로(주) 시설관리팀", num: "031-294-3018" }
+  ]}
+];
+
+// 유형별 데이터
+const DATA = {
+  "자연재난": {
+    color: "natural",
+    code: "NAT",
+    types: [
+      {
+        name: "풍수해", risk: "1순위", summary: "태풍·홍수·집중호우·해일·조수·대설 등 자연재해. 화성시 자연재난 분야 최우선 관리 대상",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "재난대응과",
+        예산: "안전관리계획 본문 참조", 피해: "재산피해 평균 121.18억원 / 인명피해 평균 84.5명(이재민 포함) / 2024년 재산피해 역대 최고 684.7억원", 목표: "재산피해 ’24~’25년 144억 → ’29년 91억 (저감)",
+        근거: ["재난 및 안전관리 기본법", "자연재해대책법 제34조", "소하천정비법 시행령", "하수도법", "하천법", "급경사지 재해예방에 관한 법률", "풍수해·지진재해보험법", "도로법", "농어촌정비법"],
+        phases: {
+          예방: ["자연재해저감 종합계획 수립 추진", "재해영향평가 협의 및 재해영향평가위원회 운영", "재난 예경보체계 구축 종합계획 수립", "소하천·하수도 정비 기본계획 수립", "지역자율방재단 운영", "풍수해보험 가입 홍보", "도시침수 대응사업 추진", "급경사지 안전관리"],
+          대비: ["여름철·겨울철 종합대책 수립", "'극한호우' 시 안전관리대책 수립", "침수방지시설 설치 지원", "침수흔적도 작성", "수방장비 비축 관리 (마대류·양수기·수중펌프 등)", "재해우려지역 정비·자원관리", "여름철 사전대비 추진기간 운영"],
+          대응: ["태풍·호우 특보 시 비상대응체계 가동 (보강→비상1→비상2→비상3단계)", "도시침수대응사업 추진", "재난예경보 시설 가동", "배수펌프장 기능유지", "우수집수정·우수관로 준설", "위험지역 통제 및 주민 안전 확보", "농작물·축산 피해 발생 시 긴급 지원"],
+          복구: ["재난재해 복구사업 추진", "시설물 유지관리 및 복구사업", "하천 유지관리", "NDMS 시스템 복구 훈련", "특별재난지역 선포 건의 (필요시)"]
+        },
+        대책수: 28,
+        대책: [
+          { n: "01", name: "자연재해저감 종합계획 수립 추진", phase: "예방", dept: "재난대응과" },
+          { n: "02", name: "재해영향평가 협의 및 위원회 운영", phase: "예방", dept: "재난대응과" },
+          { n: "03", name: "재난 예경보체계 구축 종합계획", phase: "예방", dept: "재난대응과" },
+          { n: "04", name: "여름철·겨울철 종합대책 수립", phase: "대비", dept: "재난대응과" },
+          { n: "05", name: "'극한호우' 시 안전관리대책", phase: "대비", dept: "재난대응과" },
+          { n: "08", name: "화성시 지역자율방재단 운영", phase: "예방", dept: "재난대응과" },
+          { n: "09", name: "침수방지시설 설치 지원", phase: "대비", dept: "재난대응과" },
+          { n: "10", name: "풍수해보험 운영", phase: "예방", dept: "재난대응과" },
+          { n: "14", name: "급경사지 안전관리", phase: "대비", dept: "재난대응과" },
+          { n: "15", name: "수방장비 비축 관리", phase: "대비", dept: "재난대응과" },
+          { n: "17", name: "배수펌프장 유지관리", phase: "예방", dept: "건설과" },
+          { n: "21", name: "하수관로 정비", phase: "예방", dept: "하수과" },
+          { n: "24", name: "도시침수대응사업", phase: "대응", dept: "하수과" },
+          { n: "26", name: "재난재해 복구", phase: "복구", dept: "병점구 안전건설과" }
+        ]
+      },
+      {
+        name: "폭염", risk: "2순위", summary: "여름철 폭염 종합대책. '25년 온열질환 52명(사망 1명), 가축 14,608건 피해. 평균기온 40년간 1.0℃ 상승",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "재난대응과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "온열질환 ’29년 30명 / 인명피해 제로화",
+        근거: ["재난 및 안전관리 기본법 제25조의4", "자연재해대책법", "축산법"],
+        phases: {
+          예방: ["그늘막 설치사업 (도심 체감온도 저감)", "쿨링포그 유지관리", "가축 면역증강제 지원", "폭염 취약지역·축산농가 사전관리", "재해보험 가입 홍보"],
+          대비: ["여름철 폭염 종합대책 수립", "폭염상황관리 T/F팀 운영", "무더위쉼터 현장 전수점검 (냉방시설·운영실태)", "축산농가 대응 요령 안내"],
+          대응: ["폭염 특보 발효 시 상황관리 체계 가동", "무더위쉼터 탄력 운영 (824개소)", "폭염 대응 야외용 냉방기·얼음물 나눔사업", "취약계층 보호·온열질환자 감시", "건설현장·영농작업장 피해예방 홍보", "취약노인 돌봄·방역 강화"],
+          복구: ["인명·가축 피해 현황 파악 및 지원", "폭염 대응 결과 분석 → 시설 운영·지원사업 개선", "복구 평가환류를 통한 매뉴얼 개선"]
+        },
+        대책수: 5,
+        대책: [
+          { n: "01", name: "여름철 폭염 종합대책 수립 추진", phase: "예방", dept: "재난대응과" },
+          { n: "02", name: "무더위쉼터 현장점검", phase: "예방", dept: "재난대응과" },
+          { n: "03", name: "그늘막 설치사업 추진", phase: "예방", dept: "재난대응과" },
+          { n: "04", name: "폭염대비 가축 면역증강제 지원", phase: "예방", dept: "축산정책과" },
+          { n: "05", name: "쿨링포그 유지관리", phase: "예방", dept: "기후환경정책과" }
+        ]
+      },
+      {
+        name: "산사태", risk: "3순위", summary: "토양함수지수 기반 단계별 대응(주의보·예비경보·경보). 산사태대책상황실 5~10월 운영",
+        주관기관: "산림청", 실국: "공원녹지사업소", 과: "산림휴양과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "인명피해 제로화 유지",
+        근거: ["산림재난방지법 제21조·제22조", "사방사업법"],
+        phases: {
+          예방: ["산사태현장예방단 2명 운영 (5~10월)", "산사태취약지역 현황 숙지·현장점검", "사방댐 현장점검 추진", "산사태취약지역 인근 거주자 홍보물 배포"],
+          대비: ["산사태예방 종합대책 수립 (3~4월)", "산사태대책상황실 설치·운영 (5~10월)", "산사태취약지역 실태조사 (4~11월)", "산사태취약지역 지정 및 해제 심의위 운영", "토양함수지수 80% 시 상황판단회의"],
+          대응: ["[주의보] 토양함수지수 80% - 대피 준비, CBS·문자 발송", "[예비경보] 토양함수지수 90% - 사전대피 실시", "[경보] 토양함수지수 100% - 대피명령 실시", "비상연락망 가동 (경찰·소방·읍면동)", "이재민 대피·구호"],
+          복구: ["위기상황 해소 시 대피명령 해제", "주민 복귀 지원", "사후 피해 복구"]
+        },
+        대책수: 3,
+        대책: [
+          { n: "01", name: "산사태예방 및 방지 종합대책 수립", phase: "대비", dept: "산림휴양과" },
+          { n: "02", name: "산사태 취약지역 실태조사 및 점검", phase: "예방", dept: "산림휴양과" },
+          { n: "03", name: "사방사업", phase: "예방", dept: "산림휴양과" }
+        ]
+      },
+      {
+        name: "대설·한파", risk: "4순위", summary: "「한파대책 종합지원상황실」운영. 한파쉼터 824개소·온열의자·취약계층 특별관리",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "재난대응과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "인명피해 제로화",
+        근거: ["재난 및 안전관리 기본법 제17·26조", "자연재해대책법 제34조", "도로법"],
+        phases: {
+          예방: ["취약계층 연락망 현행화", "한파·폭설 취약시설·구간 사전 점검", "한파·결빙 행동요령 홍보", "제설제·장비 점검 및 인력 운영계획", "온열의자·한파쉼터·수도 동파 점검"],
+          대비: ["주요 도로·이면도로·보행로 우선순위 설정", "출퇴근 시간대 집중 대응 계획", "비상연락망·근무체계 점검", "재난관리자원(제설제) 비축관리", "농축수산시설물 사전 시설보강"],
+          대응: ["설해대책본부 운영 (단계별 가동)", "간선도로·통학로·취약구간 제설", "한파 쉼터 운영 (824개소)", "버스정류장 온열의자 운영", "어린이집 등 돌봄시설 난방 점검", "취약계층(노숙인·차상위) 돌봄 강화", "긴급안전점검 및 지원서비스반 가동"],
+          복구: ["피해복구 대책본부 가동", "전력·통신·공공시설 신속 복구", "주택·농가·축사 피해 지원", "잔설·빙판 제거 (도로·보행로 안전회복)", "설해대책 운영 성과 분석 → 매뉴얼 보완"]
+        },
+        대책수: 5,
+        대책: [
+          { n: "01", name: "한파 사전대비 및 예방활동 강화", phase: "예방", dept: "재난대응과" },
+          { n: "02", name: "재난관리자원(제설제) 비축관리", phase: "대비", dept: "도로과" },
+          { n: "03", name: "도로 설해대책 운영", phase: "대응", dept: "도로과" },
+          { n: "04", name: "제설 대응", phase: "대응", dept: "병점구 안전건설과" },
+          { n: "05", name: "동탄권 제설작업", phase: "대응", dept: "동탄구 안전건설과" }
+        ]
+      },
+      {
+        name: "가뭄", summary: "가뭄종합대책 수립 및 농작물재해보험·수리시설 정비",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "재난대응과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["재난 및 안전관리 기본법", "농어업재해보험법", "소하천정비법", "하천법", "농어촌정비법"],
+        phases: {
+          예방: ["농작물재해보험 가입지원", "가뭄대책 용수개발사업", "수리시설 정비·보수"],
+          대비: ["가뭄재해대책 추진", "가뭄종합대책 수립"],
+          대응: ["급수 지원 및 비상급수 운영", "관계기관 협조체계 가동"],
+          복구: ["피해 농가 지원·시설 복구"]
+        },
+        대책수: 3,
+        대책: [
+          { n: "01", name: "가뭄재해대책 추진", phase: "대비", dept: "재난대응과" },
+          { n: "02", name: "농작물 재해보험 가입지원", phase: "예방", dept: "농업정책과" },
+          { n: "03", name: "가뭄대책 용수개발사업", phase: "예방", dept: "건설과" }
+        ]
+      },
+      {
+        name: "지진", summary: "「지진 재난 현장조치 행동매뉴얼」 운용. 교량 내진보강·지진안전시설물 인증 지원",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "재난대응과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["재난 및 안전관리 기본법 제34조의5", "지진·화산재해대책법", "풍수해·지진재해보험법"],
+        phases: {
+          예방: ["지진재해보험 가입 확대 (취약계층 보험제도 안내)", "교량 내진보강사업 추진", "지진안전시설물 인증 지원 (다중이용·민간 건축물)", "지진발생 시 행동요령 교육·홍보"],
+          대비: ["지진 재난 현장조치 행동매뉴얼 지속 정비", "관계부서·유관기관 합동 표준화", "모의훈련 및 상황 전파 훈련", "비상연락망·상황관리체계 상시 점검"],
+          대응: ["매뉴얼 기반 상황관리반 신속 가동", "인명 구조 및 2차 피해(화재·붕괴) 확산 방지", "교량 등 주요 기반시설 긴급 안전점검·통제", "재난문자·방송 통한 행동요령 즉시 안내"],
+          복구: ["지진재해보험 연계 피해 회복 지원", "피해 주민 행정 지원·상담 연계", "피해 시설 응급복구 및 내진성능 보완", "복구 과정 평가 → 매뉴얼·교육·인증제도 개선"]
+        },
+        대책수: 4,
+        대책: [
+          { n: "01", name: "지진 재난 현장조치 행동매뉴얼 정비", phase: "예방", dept: "재난대응과" },
+          { n: "02", name: "지진안전 시설물 인증 지원", phase: "대비", dept: "재난대응과" },
+          { n: "03", name: "지진발생 시 행동요령 교육·홍보", phase: "예방", dept: "재난대응과" },
+          { n: "04", name: "지진재해보험 운영", phase: "예방", dept: "재난대응과" }
+        ]
+      },
+      {
+        name: "황사", summary: "황사 대응 훈련",
+        주관기관: "기후에너지환경부", 실국: "기후에너지환경국", 과: "기후환경정책과",
+        피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 1,
+        대책: [{ n: "01", name: "황사 대응 훈련 실시", phase: "대비", dept: "기후환경정책과" }]
+      },
+      {
+        name: "조류 대발생(녹조)", summary: "비점오염저감시설·가축분뇨 공공처리시설 운영",
+        주관기관: "기후에너지환경부", 실국: "기후에너지환경국", 과: "물환경생태과",
+        대책수: 3,
+        대책: [
+          { n: "01", name: "적조 예찰반 관리 운영", phase: "예방", dept: "해양수산과" },
+          { n: "02", name: "비점오염저감시설 유지관리 및 신규설치", phase: "예방", dept: "물환경생태과" },
+          { n: "03", name: "가축분뇨 공공처리시설 운영", phase: "예방", dept: "물환경생태과" }
+        ]
+      },
+      {
+        name: "낙뢰·화산재해", summary: "낙뢰 예방 홍보 및 대형화산폭발 현장조치 매뉴얼 정비",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "재난대응과",
+        대책수: 2,
+        대책: [
+          { n: "01", name: "낙뢰 예방 홍보 및 관리체계 구축", phase: "예방", dept: "재난대응과" },
+          { n: "02", name: "대형화산폭발 현장조치 행동매뉴얼 재정비", phase: "대비", dept: "재난대응과" }
+        ]
+      }
+    ]
+  },
+  "사회재난": {
+    color: "social",
+    code: "SOC",
+    types: [
+      {
+        name: "화재", risk: "사회재난 1순위", summary: "화재취약 건축물 TF 운영. 4단계 비상근무체계(예비·지원1·2·3단계). 재산피해 1,671억원으로 사회재난 중 최대",
+        주관기관: "행정안전부·소방청", 실국: "시설소관부서", 과: "재난대응과(총괄)",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "발생건수 ’29년 550건 (저감)",
+        근거: ["재난 및 안전관리 기본법", "소방기본법", "화재의 예방 및 안전관리에 관한 법률", "화성시 재난현장 통합지원본부 설치·운영 조례"],
+        phases: {
+          예방: ["화재취약 건축물 TF 구축·운영", "국가유산 재난대응 매뉴얼 정비", "문화유산 방재시설 유지관리", "문화재 민관 합동 점검 (2~8월)", "야영장 화재안정성 확보"],
+          대비: ["화재 비상근무 체계 확립 (4단계)", "화재안심마스크 비치·지원", "전통시장 화재알림시설 설치관리", "단계별 응소부서 편성·역할 확인"],
+          대응: ["[예비단계] 재난대응과 2명 출동·상황관리", "[지원1단계] 4개 부서 6명 (현장대응반)", "[지원2단계] 6개 부서 11명 (지휘본부 설치)", "[지원3단계] 재대본·통지본 통합운영", "재난대응 장비 임차 / 초기대응 방제"],
+          복구: ["피해시설 복구 및 지원", "씨랜드 화재참사 추모공원 관리", "사고원인 분석 / 매뉴얼 개선"]
+        },
+        대책수: 11,
+        대책: [
+          { n: "01", name: "화재취약 건축물 등 재난재해예방 TF 구축 운영", phase: "예방", dept: "도시계획상임기획단" },
+          { n: "02", name: "국가유산 재난대응 매뉴얼 정비", phase: "예방", dept: "문화유산과" },
+          { n: "03", name: "문화유산 방재시설 유지관리", phase: "예방", dept: "문화유산과" },
+          { n: "04", name: "문화재 민관 합동 점검", phase: "예방", dept: "문화유산과" },
+          { n: "05", name: "화재 비상근무 체계 확립 및 운영", phase: "대비", dept: "재난대응과" },
+          { n: "06", name: "화재 등 재난대응 장비임차", phase: "대응", dept: "재난대응과" },
+          { n: "07", name: "화재사고 초기대응 방제", phase: "대응", dept: "재난대응과" },
+          { n: "08", name: "씨랜드 화재참사 희생자 추모공원 관리", phase: "예방", dept: "청년청소년과" },
+          { n: "09", name: "화재안심마스크 비치 및 지원사업", phase: "대비", dept: "안전정책과" },
+          { n: "10", name: "전통시장 화재알림시설 설치관리", phase: "대비", dept: "지역경제과" },
+          { n: "11", name: "야영장 화재안정성 확보", phase: "예방", dept: "관광진흥과" }
+        ]
+      },
+      {
+        name: "도로교통 재난사고", risk: "사회재난 1순위", summary: "화성시 교통안전시행계획 수립 및 교통사고 잦은 곳 개선·고령운전자 면허반납 지원 등",
+        주관기관: "국토교통부", 실국: "교통국", 과: "교통정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "사망자(10만인당) ’26년 2.5명",
+        근거: ["교통안전법", "도로법", "도로교통법"],
+        phases: {
+          예방: ["화성시 교통안전시행계획 수립", "교통사고 잦은 곳 개선사업", "고령운전자 면허 자진반납 지원 (조례 개정)", "위험도로 구조 개선"],
+          대비: ["교통안전정책 심의위원회 운영", "비상연락체계 구축", "관계기관 협조체계 확보"],
+          대응: ["사고 시 긴급구조·구급 협조", "현장응급의료소 운영", "교통통제 및 우회로 안내"],
+          복구: ["사고원인 분석", "위험구간 시설 개선", "재발 방지대책 수립"]
+        },
+        대책수: 5,
+        대책: [
+          { n: "01", name: "화성시 교통안전시행계획 수립", phase: "예방", dept: "교통정책과" },
+          { n: "02", name: "교통안전정책 심의위원회 운영", phase: "예방", dept: "교통정책과" },
+          { n: "03", name: "교통사고 잦은 곳 개선 사업", phase: "예방", dept: "교통정책과" },
+          { n: "04", name: "고령운전자 운전면허 자진반납 지원", phase: "예방", dept: "교통정책과" },
+          { n: "05", name: "위험도로 구조 개선", phase: "예방", dept: "도로과" }
+        ]
+      },
+      {
+        name: "시설 재난사고", summary: "시설물 안전 및 유지관리에 관한 특별법 기반 정기·정밀안전점검",
+        주관기관: "국토교통부", 실국: "주택국", 과: "건축과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["시설물의 안전 및 유지관리에 관한 특별법"],
+        대책수: 14
+      },
+      {
+        name: "대기오염", summary: "탄소중립 녹색성장 기본계획. 미세먼지·기후위기 대응",
+        주관기관: "기후에너지환경부", 실국: "기후에너지환경국", 과: "기후환경정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["대기환경보전법", "탄소중립 기본법"],
+        대책수: 7
+      },
+      {
+        name: "유해화학물질 재난사고", summary: "유해화학물질 사고 대응 훈련. 6.아리셀 공장 화재 등 대응 경험",
+        주관기관: "기후에너지환경부", 실국: "기후에너지환경국", 과: "환경지도과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "인명피해 제로화",
+        근거: ["화학물질관리법"],
+        대책수: 7
+      },
+      {
+        name: "산불", summary: "산불방지종합대책 수립",
+        주관기관: "산림청", 실국: "공원녹지사업소", 과: "산림휴양과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "발생건수 ’29년 8건",
+        근거: ["산림보호법", "산림재난방지법"],
+        대책수: 5
+      },
+      {
+        name: "철도교통 재난사고", summary: "서해랑 케이블카(궤도) 안전점검 등",
+        주관기관: "국토교통부", 실국: "교통국", 과: "철도전략과",
+        대책수: 2,
+        대책: [{ n: "01", name: "서해랑 케이블카(궤도) 안전점검", phase: "예방", dept: "관광진흥과" }]
+      },
+      {
+        name: "항공교통 재난사고", summary: "「항공기재난 현장조치 행동매뉴얼」 운용",
+        주관기관: "국토교통부", 실국: "교통국", 과: "교통정책과",
+        피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["항공안전법", "공항안전운영기준"],
+        대책수: 1,
+        대책: [{ n: "01", name: "현장조치행동매뉴얼 등 반영", phase: "대비", dept: "교통정책과" }]
+      },
+      {
+        name: "선박 재난사고", summary: "내수면 어선 노후기관 교체·어선사고 예방시스템",
+        주관기관: "해양수산부", 실국: "농정해양국", 과: "해양수산과",
+        대책수: 3,
+        대책: [
+          { n: "01", name: "내수면 어선 노후기관 교체 지원", phase: "예방", dept: "해양수산과" },
+          { n: "02", name: "어선사고 예방시스템 구축", phase: "예방", dept: "해양수산과" },
+          { n: "03", name: "화성바다누리호 선박 관리", phase: "예방", dept: "해양수산과" }
+        ]
+      },
+      {
+        name: "다중밀집건축물 붕괴", summary: "건축물 유지관리 점검 실시",
+        주관기관: "국토교통부", 실국: "주택국", 과: "건축과",
+        대책수: 1,
+        대책: [{ n: "01", name: "다중밀집건축물 붕괴 재난 예방활동", phase: "예방", dept: "건축과" }]
+      },
+      {
+        name: "저수지 붕괴", summary: "저수지붕괴 비상대처훈련 및 농업기반시설 유지관리",
+        주관기관: "농림축산식품부", 실국: "안전건설실", 과: "건설과",
+        대책수: 2,
+        대책: [
+          { n: "01", name: "저수지붕괴 비상대처 훈련", phase: "대비", dept: "건설과" },
+          { n: "02", name: "저수지 점검 등 농업기반시설 유지관리", phase: "예방", dept: "건설과" }
+        ]
+      },
+      {
+        name: "지반침하", summary: "지하시설물 안전관리 실태점검 / 지표투과레이더(GPR) 공동조사",
+        주관기관: "국토교통부", 실국: "안전건설실", 과: "도로과",
+        대책수: 4,
+        대책: [
+          { n: "01", name: "지하시설물 안전관리 실태점검", phase: "예방", dept: "안전정책과" },
+          { n: "02", name: "상수도 등 지반침하 GPR 공동조사", phase: "예방", dept: "맑은물시설과" },
+          { n: "03", name: "우수·오수 지하시설물 GPR 공동조사", phase: "예방", dept: "하수과" },
+          { n: "04", name: "지표투과레이더 지반탐사 지원사업", phase: "예방", dept: "안전정책과" }
+        ]
+      },
+      {
+        name: "문화시설(공연장)", summary: "공연 등 재해대처계획 수립 및 점검",
+        주관기관: "문화체육관광부", 실국: "문화관광국", 과: "문화예술과",
+        대책수: 2,
+        대책: [
+          { n: "01", name: "공연 등 재해대처계획 수립 및 점검", phase: "대비", dept: "문화예술과" },
+          { n: "02", name: "대형 공연장 자체안전 검사 정기 감독", phase: "예방", dept: "문화예술과" }
+        ]
+      },
+      {
+        name: "체육시설", summary: "체육시설 안전관리계획·지도점검",
+        주관기관: "문화체육관광부", 실국: "교육체육국", 과: "체육시설과",
+        대책수: 1,
+        대책: [{ n: "01", name: "체육시설 안전관리계획 및 지도 점검계획", phase: "예방", dept: "체육진흥과" }]
+      },
+      {
+        name: "의료시설", summary: "의료기관 안전관리시설 기준 지도점검",
+        주관기관: "보건복지부", 실국: "보건소", 과: "보건정책과",
+        대책수: 2,
+        대책: [
+          { n: "01", name: "의료기관 안전관리 지도점검 (만세구)", phase: "예방", dept: "만세구보건소 보건정책과" },
+          { n: "02", name: "의료기관 안전관리 지도점검 (병점구)", phase: "예방", dept: "병점구보건소 보건행정과" }
+        ]
+      },
+      {
+        name: "사회복지시설", summary: "사회복지시설 안전점검",
+        주관기관: "보건복지부", 실국: "돌봄복지국", 과: "복지정책과",
+        대책수: 1,
+        대책: [{ n: "01", name: "사회복지시설 안전점검 실시", phase: "예방", dept: "복지정책과" }]
+      },
+      {
+        name: "어린이놀이시설", summary: "어린이놀이시설 안전관리계획 및 지도점검",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "안전정책과",
+        대책수: 1,
+        대책: [{ n: "01", name: "어린이놀이시설 안전관리계획 및 지도점검", phase: "예방", dept: "안전정책과" }]
+      },
+      {
+        name: "장애인복지시설", summary: "장애인복지시설 안전점검",
+        주관기관: "보건복지부", 실국: "돌봄복지국", 과: "장애인복지과",
+        대책수: 1,
+        대책: [{ n: "01", name: "장애인복지시설 안전점검 실시", phase: "예방", dept: "장애인복지과" }]
+      },
+      {
+        name: "학교시설", summary: "학교환경 개선사업",
+        주관기관: "교육부", 실국: "교육체육국", 과: "교육지원과",
+        대책수: 1,
+        대책: [{ n: "01", name: "학교환경 개선사업 추진", phase: "예방", dept: "교육지원과" }]
+      },
+      {
+        name: "수질오염", risk: "사회재난 2순위", summary: "폐수배출시설·오수처리시설·하수처리시설 관리",
+        주관기관: "기후에너지환경부", 실국: "기후에너지환경국", 과: "환경지도과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 7
+      }
+    ]
+  },
+  "안전사고": {
+    color: "safety",
+    code: "SAF",
+    types: [
+      {
+        name: "사업장 산재", summary: "산업안전 인식개선 교육·중대재해예방. ISO 45001 인증 ('25.11) / 산업안전지킴이 운영",
+        주관기관: "고용노동부", 실국: "기업투자실", 과: "노사협력과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "사망자(10만인당) ’29년 22명 (연 2% 점감)",
+        근거: ["산업안전보건법", "중대재해 처벌 등에 관한 법률"],
+        phases: {
+          예방: ["산업안전 인식개선 교육 지원", "건설업·제조업 소규모 사업장 안전점검", "산업안전지킴이 운영 (50인 미만 제조업)", "권역별 점검조 편성"],
+          대비: ["중대산업재해 역량 강화 교육", "ISO 45001 안전보건경영시스템 운영", "위험성 평가 체계 구축"],
+          대응: ["사고 시 긴급 대응 및 보고체계 가동", "피해 근로자 응급 처치·이송"],
+          복구: ["피해자 보상 및 사후관리", "사고원인 분석 → 재발방지 대책 수립"]
+        },
+        대책수: 15,
+        대책: [
+          { n: "01", name: "사업장 안전점검 및 산업안전 인식개선 교육", phase: "예방", dept: "노사협력과" },
+          { n: "02", name: "안전한 일터를 위한 중대산업재해 역량 강화", phase: "예방", dept: "안전정책과" }
+        ]
+      },
+      {
+        name: "자살", risk: "사망률 저감 최우선", summary: "자살예방 TF 구축·운영. 사망률(10만명당) '24~'25 26.3 → '29년 17.4 목표",
+        주관기관: "보건복지부", 실국: "보건소", 과: "보건정책과",
+        피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)", 목표: "사망률(10만명당) ’29년 17.4",
+        근거: ["자살예방 및 생명존중문화 조성을 위한 법률"],
+        phases: {
+          예방: ["자살예방 TF 구축·운영", "생명존중 문화 조성", "지역사회 인식 개선 홍보"],
+          대비: ["고위험군 발굴 및 모니터링", "정신건강복지센터 연계 시스템"],
+          대응: ["응급개입 및 위기관리", "자살시도자 사후관리"],
+          복구: ["유족 지원 및 사후관리", "재발 방지 사례 분석"]
+        },
+        대책수: 4
+      },
+      {
+        name: "범죄", risk: "안전사고 1순위", summary: "성폭력·가정폭력 방지 및 피해자 보호. AI 통합 영상관제(CCTV 12,887대)",
+        주관기관: "경찰청", 실국: "성평등가족국", 과: "여성정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 9,
+        대책: [{ n: "01", name: "성폭력·가정폭력 등 폭력 방지 및 피해자 보호지원", phase: "예방", dept: "여성정책과" }]
+      },
+      {
+        name: "승강기 사고", summary: "승강기 현장점검",
+        주관기관: "행정안전부", 실국: "기후에너지환경국", 과: "신재생에너지과",
+        피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 1,
+        대책: [{ n: "01", name: "승강기 현장점검", phase: "예방", dept: "신재생에너지과" }]
+      },
+      {
+        name: "전기·가스 사고", risk: "안전사고 2순위", summary: "명절 대비 가스 취약시설 점검. 화성시 전기자동차 화재예방 대책",
+        주관기관: "산업통상자원부", 실국: "기후에너지환경국", 과: "신재생에너지과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 3,
+        대책: [{ n: "01", name: "명절 대비 가스 취약시설 점검", phase: "예방", dept: "신재생에너지과" }]
+      },
+      {
+        name: "등산·레저 사고", summary: "산악사고 예방관리 강화",
+        주관기관: "행정안전부", 실국: "공원녹지사업소", 과: "산림휴양과",
+        피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 3,
+        대책: [{ n: "01", name: "산악사고 예방관리 강화", phase: "예방", dept: "산림휴양과" }]
+      },
+      {
+        name: "의료제품 사고", summary: "의료제품 등 안전관리",
+        주관기관: "식품의약품안전처", 실국: "보건소", 과: "보건정책과",
+        예산: "안전관리계획 본문 참조",
+        대책수: 1,
+        대책: [{ n: "01", name: "의료제품 등 안전관리", phase: "예방", dept: "보건정책과" }]
+      },
+      {
+        name: "식품 사고", risk: "안전사고 3순위", summary: "합동단속 등 사후관리 강화",
+        주관기관: "식품의약품안전처", 실국: "보건소", 과: "위생정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 13,
+        대책: [{ n: "01", name: "합동단속 등 사후관리 강화", phase: "예방", dept: "위생정책과" }]
+      },
+      {
+        name: "생활제품 사고", summary: "위생용품 안전관리",
+        주관기관: "산업통상자원부", 실국: "보건소", 과: "위생정책과",
+        대책수: 1,
+        대책: [{ n: "01", name: "위생용품 안전관리", phase: "예방", dept: "위생정책과" }]
+      },
+      {
+        name: "농·수산업 사고", summary: "농기계 안전사용·이용기술 교육",
+        주관기관: "농림축산식품부·해양수산부", 실국: "농정해양국", 과: "농업정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 5,
+        대책: [{ n: "01", name: "농기계 안전사용·이용기술 교육", phase: "예방", dept: "농업정책과" }]
+      }
+    ]
+  },
+  "공통": {
+    color: "common",
+    code: "CMN",
+    types: [
+      {
+        name: "구조·구급 및 응급의료", summary: "국가 재난의료체계 운영. 신속대응반 분기별 훈련 / 현장응급의료소 운영",
+        주관기관: "보건복지부", 실국: "보건소", 과: "보건정책과",
+        예산: "안전관리계획 본문 참조",
+        근거: ["응급의료에 관한 법률 제18조", "재난응급의료 비상대응매뉴얼"],
+        phases: {
+          예방: ["시민 대상 CPR 교육 (연 16회 이상)", "AED 의무설치기관 지도·점검", "유효기간 도래 소모품(패드·배터리) 선제적 교체 지원"],
+          대비: ["응급의료기관 평가(A·B·C등급) 보조금 차등 지급", "신속대응반 분기별 도상훈련", "한국형 재난의료지원 교육(KDLS) 참가"],
+          대응: ["현장응급의료소 운영 (다수 사상자 발생 시 즉각 출동)", "환자 분류(Triage) 및 최적 병원 이송", "소방-보건소-응급의료기관 핫라인 상시 가동"],
+          복구: ["재난 대응 사례 분석 → 매뉴얼·교육 콘텐츠 고도화", "사상자 및 목격자 심리 회복 지원 체계 검토"]
+        },
+        대책수: 5,
+        대책: [{ n: "01", name: "국가 재난의료체계 운영", phase: "대비", dept: "보건정책과" }]
+      },
+      {
+        name: "재난 구호 및 복구", risk: "공통 1순위", summary: "재해구호계획 수립. NDMS 시스템 복구 훈련",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "안전정책과",
+        예산: "안전관리계획 본문 참조",
+        대책수: 5,
+        대책: [{ n: "01", name: "재해구호계획 수립 및 추진", phase: "대비", dept: "안전정책과" }]
+      },
+      {
+        name: "안전취약계층 지원", summary: "외국인 무료진료(연 551명)·취약계층 보호. 화성시 의료나눔봉사단 운영",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "안전정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["재난 및 안전관리 기본법 제31조의2", "어린이안전관리에 관한 법률", "양성평등기본법", "화성시 재난취약계층 지원 조례", "화성시 다문화가족 및 외국인주민 지원 조례"],
+        대책수: 16,
+        대책: [{ n: "01", name: "화성시 의료나눔봉사단 외국인 무료진료", phase: "예방", dept: "보건정책과" }]
+      },
+      {
+        name: "재난안전관리체계", risk: "공통 2순위", summary: "재난유형별 현장조치 행동매뉴얼 총괄 관리. 국제안전도시 공인('25.6)·AI 통합 영상관제",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "안전정책과",
+        예산: "안전관리계획 본문 참조",
+        대책수: 21,
+        대책: [{ n: "01", name: "재난유형별 현장조치 행동매뉴얼 총괄 관리", phase: "대비", dept: "안전정책과" }]
+      },
+      {
+        name: "국정과제 연계 사업", summary: "화성시 재난 및 안전관리 기본조례 제정 / 국립 안전체험교육장 유치",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "안전정책과",
+        대책수: 5,
+        대책: [
+          { n: "01", name: "화성시 재난 및 안전관리 기본조례 제정", phase: "예방", dept: "안전정책과" },
+          { n: "02", name: "사업장 안전점검 및 산업안전 인식개선 교육", phase: "예방", dept: "노사협력과" },
+          { n: "03", name: "안전한 일터를 위한 중대산업재해 역량 강화", phase: "예방", dept: "안전정책과" },
+          { n: "04", name: "(가칭) 국립 화성(수도권) 안전체험교육장 유치", phase: "예방", dept: "노사협력과" },
+          { n: "05", name: "재난재해위험지도 운용", phase: "대비", dept: "안전정책과" }
+        ]
+      },
+      {
+        name: "토양오염", summary: "토양오염실태 조사. 황계동 비위생매립지 정비",
+        주관기관: "기후에너지환경부", 실국: "기후에너지환경국", 과: "환경지도과",
+        예산: "안전관리계획 본문 참조",
+        대책수: 4
+      },
+      {
+        name: "해양오염", summary: "해양오염 방제훈련·취약해안 폐기물 대응·어구부표 보증금제",
+        주관기관: "해양수산부·해양경찰청", 실국: "농정해양국", 과: "해양수산과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 4,
+        대책: [
+          { n: "01", name: "해양오염 방제훈련 실시", phase: "대비", dept: "해양수산과" },
+          { n: "02", name: "해양오염 예방 홍보 캠페인", phase: "예방", dept: "해양수산과" },
+          { n: "03", name: "취약해안 폐기물 대응", phase: "예방", dept: "해양수산과" },
+          { n: "04", name: "어구부표 보증금제", phase: "예방", dept: "해양수산과" }
+        ]
+      },
+      {
+        name: "방사능 재난사고", summary: "지역방사능방재계획 수립. 백색비상(예비본부)·청색비상 이상(대책본부) 가동",
+        주관기관: "원자력안전위원회", 실국: "안전건설실", 과: "재난대응과",
+        대책수: 1,
+        대책: [{ n: "01", name: "지역방사능방재계획 수립", phase: "대비", dept: "재난대응과" }]
+      },
+      {
+        name: "다중운집 인파사고", summary: "대규모 집회·행사·축제 다중운집인파관리. 사전점검 통한 사고예방",
+        주관기관: "행정안전부·경찰청", 실국: "안전건설실", 과: "안전정책과",
+        대책수: 1,
+        대책: [{ n: "01", name: "다중운집인파관리 안전관리대책 수립", phase: "대비", dept: "안전정책과" }]
+      },
+      {
+        name: "감염병", summary: "신종감염병 신속대응반 24시간 운영 / 생물테러 모의훈련 실시",
+        주관기관: "보건복지부·질병관리청", 실국: "만세구보건소", 과: "보건정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        근거: ["감염병의 예방 및 관리에 관한 법률 제4조"],
+        phases: {
+          예방: ["권역별 맞춤형 방역소독 (도농복합·도심형)", "찾아가는 감염병 예방교육 (연 1만명 이상)", "고위험군 보호 강화 (아이돌보미 예방접종)", "방역 인프라 상시 운영 (포충기·AI-DMS)"],
+          대비: ["감염병분야 현장조치 행동매뉴얼 정비 (연 2회)", "감염병 예방물품 비축 (개인보호장비·소독제)", "법정감염병 신고체계 운영·교육", "생물테러 대응 합동훈련 (민·관·경·군)"],
+          대응: ["24시간 신속대응반 가동", "역학조사 및 확산 차단 (접촉자 관리)", "검역지역 유증상 입국자 추적조사", "긴급 방역소독 및 예방물품 즉시 지원"],
+          복구: ["사후 모니터링·시설 정상화 지원", "사례 분석 → 행동매뉴얼·GIS 반영", "비축 물자 재확보", "복구 결과 보고·정책 반영"]
+        },
+        대책수: 3,
+        대책: [
+          { n: "01", name: "감염병분야 현장조치 행동매뉴얼 정비", phase: "대비", dept: "만세구보건소 보건정책과" },
+          { n: "02", name: "신종감염병 신속대응반 운영 및 생물테러 모의훈련", phase: "대비", dept: "보건소" },
+          { n: "03", name: "아이돌보미 건강증진비 지원", phase: "예방", dept: "저출생대응과" }
+        ]
+      },
+      {
+        name: "가축전염병", summary: "방역관리대책 홍보·교육. 3단계 운영(미발생→인접발생→관내발생)",
+        주관기관: "농림축산식품부", 실국: "농정해양국", 과: "축산정책과",
+        예산: "안전관리계획 본문 참조", 피해: "안전관리계획 본문 통계 참조 (NDMS 피해실적)",
+        대책수: 8
+      },
+      {
+        name: "수산생물전염병", summary: "수산생물질병 예방약품 지원",
+        주관기관: "해양수산부", 실국: "농정해양국", 과: "해양수산과",
+        대책수: 1,
+        대책: [{ n: "01", name: "수산생물질병 예방약품 지원", phase: "예방", dept: "해양수산과" }]
+      },
+      {
+        name: "에너지 사고", summary: "에너지절약 홍보",
+        주관기관: "산업통상자원부", 실국: "기후에너지환경국", 과: "신재생에너지과",
+        대책수: 3,
+        대책: [{ n: "01", name: "에너지절약 홍보", phase: "예방", dept: "신재생에너지과" }]
+      },
+      {
+        name: "정보통신 사고", summary: "재해재난 대비 개인정보처리시스템 위기대응 매뉴얼",
+        주관기관: "과학기술정보통신부", 실국: "기획조정실", 과: "정보통신과",
+        대책수: 4,
+        대책: [{ n: "01", name: "재해재난 대비 개인정보처리시스템 위기대응 매뉴얼", phase: "대비", dept: "정보통신과" }]
+      },
+      {
+        name: "수도·먹는물", summary: "동파예방 주민 홍보·노후관 교체·24시간 누수 복구",
+        주관기관: "기후에너지환경부", 실국: "맑은물사업소", 과: "맑은물시설과",
+        근거: ["수도법", "먹는물관리법"],
+        phases: {
+          예방: ["수도사고 현장조치 행동매뉴얼 매년 정비", "노후 상수관 교체 (20년 이상 구간)", "배수지·가압장 등 주요시설 정기·정밀 안전점검 (92개소)", "법정 수질항목 검사(매월)·비상오염지표 확대"],
+          대비: ["정비된 매뉴얼 기반 비상 대응 훈련", "스마트 관망관리 (자동 퇴수·수질 계측 상시 모니터링)", "겨울철 수도미터기 동파 예방대책", "24시간 상황실 운영 준비"],
+          대응: ["현장조치 행동매뉴얼 즉각적 가동", "24시간 누수 복구 및 단수 민원 처리", "대규모 단수 시 비상용 급수차량 투입·수계 전환"],
+          복구: ["관세척 및 수질 검사 통한 정상 급수 확인", "사고 사례 분석 → 매뉴얼 미비점 보완", "노후관로 교체 우선순위 반영"]
+        },
+        대책수: 6,
+        대책: [{ n: "01", name: "동파예방을 위한 주민 홍보", phase: "예방", dept: "맑은물시설과" }]
+      },
+      {
+        name: "청사 건축물", summary: "기능연속성 계획(BCP) 정비",
+        주관기관: "행정안전부", 실국: "재정국", 과: "재산관리과",
+        대책수: 3,
+        대책: [{ n: "01", name: "기능연속성 계획 정비", phase: "대비", dept: "재산관리과" }]
+      },
+      {
+        name: "전시재난·테러", summary: "충무계획 작성",
+        주관기관: "행정안전부", 실국: "안전건설실", 과: "안전정책과",
+        예산: "안전관리계획 본문 참조",
+        대책수: 4,
+        대책: [{ n: "01", name: "충무계획 작성", phase: "대비", dept: "안전정책과" }]
+      },
+      {
+        name: "의료서비스", summary: "응급의료협의체 운영",
+        주관기관: "보건복지부", 실국: "보건소", 과: "보건정책과",
+        대책수: 1,
+        대책: [{ n: "01", name: "응급의료협의체 운영", phase: "대비", dept: "보건정책과" }]
+      }
+    ]
+  }
+};
+
+// ============================================================
+// 편집 모드 및 데이터 영속화 (localStorage)
+// ============================================================
+const STORAGE_KEY = 'hwaseong_safety_manual_v1';
+let editMode = false;
+
+// 기본 DATA 백업
+const DEFAULT_DATA = JSON.parse(JSON.stringify(DATA));
+const DEFAULT_FUNCTIONS = JSON.parse(JSON.stringify(FUNCTIONS));
+const DEFAULT_CONTACTS = JSON.parse(JSON.stringify(CONTACTS));
+
+// 로드
+function loadData(silent = false) {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.DATA) {
+        Object.keys(parsed.DATA).forEach(k => { DATA[k] = parsed.DATA[k]; });
+      }
+      if (parsed.FUNCTIONS) {
+        FUNCTIONS.length = 0;
+        parsed.FUNCTIONS.forEach(f => FUNCTIONS.push(f));
+      }
+      if (parsed.CONTACTS) {
+        CONTACTS.length = 0;
+        parsed.CONTACTS.forEach(c => CONTACTS.push(c));
+      }
+      if (!silent) showToast('저장된 데이터를 불러왔습니다');
+      return true;
+    }
+  } catch (e) {
+    console.warn('데이터 로드 실패:', e);
+  }
+  return false;
+}
+
+// 저장 (디바운스)
+let saveTimer = null;
+function saveData(immediate = false) {
+  if (saveTimer) clearTimeout(saveTimer);
+  const doSave = () => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ DATA, FUNCTIONS, CONTACTS, savedAt: new Date().toISOString() }));
+      showToast('변경사항이 저장되었습니다');
+    } catch (e) {
+      showToast('저장 실패: 용량 초과 가능성', true);
+    }
+  };
+  if (immediate) {
+    doSave();
+  } else {
+    saveTimer = setTimeout(doSave, 500);
+  }
+}
+
+// 토스트 메시지
+function showToast(message, isError = false) {
+  let toast = document.getElementById('saveToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'saveToast';
+    toast.className = 'save-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.background = isError ? 'var(--sev-severe)' : 'var(--edit)';
+  toast.style.color = isError ? 'white' : '#000';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// 편집 모드 토글
+function toggleEditMode() {
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  document.getElementById('editToggle').classList.toggle('active', editMode);
+  document.getElementById('editToggle').textContent = editMode ? '편집 모드 ON' : '편집 모드';
+  applyDashEditMode(); // 대시보드 편집 가능 영역 토글
+  reRenderAll();
+  showToast(editMode ? '편집 모드 활성화 — 모든 텍스트 클릭하여 수정 가능' : '편집 모드 종료');
+}
+window.toggleEditMode = toggleEditMode;
+
+// 데이터 내보내기
+function exportData() {
+  const blob = new Blob([JSON.stringify({ DATA, FUNCTIONS, CONTACTS, DASHBOARD_TEXTS, exportedAt: new Date().toISOString() }, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `화성시_안전매뉴얼_데이터_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('JSON 파일로 내보냈습니다');
+}
+window.exportData = exportData;
+
+// 데이터 가져오기
+function importData() {
+  document.getElementById('importFile').click();
+}
+window.importData = importData;
+
+document.getElementById('importFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const parsed = JSON.parse(ev.target.result);
+      if (parsed.DATA) {
+        Object.keys(DATA).forEach(k => delete DATA[k]);
+        Object.keys(parsed.DATA).forEach(k => { DATA[k] = parsed.DATA[k]; });
+      }
+      if (parsed.FUNCTIONS) {
+        FUNCTIONS.length = 0;
+        parsed.FUNCTIONS.forEach(f => FUNCTIONS.push(f));
+      }
+      if (parsed.CONTACTS) {
+        CONTACTS.length = 0;
+        parsed.CONTACTS.forEach(c => CONTACTS.push(c));
+      }
+      if (parsed.DASHBOARD_TEXTS) {
+        DASHBOARD_TEXTS = parsed.DASHBOARD_TEXTS;
+        localStorage.setItem(DASH_STORAGE_KEY, JSON.stringify(DASHBOARD_TEXTS));
+        applyDashboardTexts();
+      }
+      saveData();
+      reRenderAll();
+      showToast('가져오기 완료');
+    } catch (err) {
+      showToast('파일 형식 오류', true);
+    }
+  };
+  reader.readAsText(file);
+});
+
+// 초기화
+function resetData() {
+  if (!confirm('모든 편집 내용을 초기 상태로 복원하시겠습니까?\n대시보드 수정 내용을 포함한 모든 변경사항이 사라집니다.\n이 작업은 되돌릴 수 없습니다.')) return;
+  Object.keys(DATA).forEach(k => delete DATA[k]);
+  Object.keys(DEFAULT_DATA).forEach(k => { DATA[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k])); });
+  FUNCTIONS.length = 0;
+  DEFAULT_FUNCTIONS.forEach(f => FUNCTIONS.push(JSON.parse(JSON.stringify(f))));
+  CONTACTS.length = 0;
+  DEFAULT_CONTACTS.forEach(c => CONTACTS.push(JSON.parse(JSON.stringify(c))));
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(DASH_STORAGE_KEY);
+  DASHBOARD_TEXTS = {};
+  location.reload(); // 대시보드 HTML 원본 복원을 위해 새로고침
+}
+window.resetData = resetData;
+
+function reRenderAll() {
+  if (currentView === 'manual') renderManual();
+  if (currentView === 'org') {
+    document.getElementById('functionsGrid').innerHTML = '';
+    renderFunctions();
+  }
+  if (currentView === 'contact') renderContacts();
+}
+
+// editable contentEditable 헬퍼
+function makeEditable(text, path, isMultiline = false) {
+  const safe = String(text == null ? '' : text).replace(/"/g, '&quot;');
+  return `<span class="editable" contenteditable="true" data-path="${path}" data-multiline="${isMultiline}">${safe}</span>`;
+}
+
+// 편집 이벤트 위임
+document.addEventListener('blur', (e) => {
+  if (!editMode) return;
+  if (!e.target.classList || !e.target.classList.contains('editable')) return;
+  const path = e.target.dataset.path;
+  if (!path) return;
+  const newValue = e.target.innerText.trim();
+  setByPath(path, newValue);
+  saveData();
+}, true);
+
+// Enter 키 입력시 (multiline=false인 경우) 줄바꿈 방지
+document.addEventListener('keydown', (e) => {
+  if (e.target.classList && e.target.classList.contains('editable')) {
+    if (e.key === 'Enter' && e.target.dataset.multiline !== 'true') {
+      e.preventDefault();
+      e.target.blur();
+    }
+  }
+});
+
+// path → 데이터 접근 (예: "자연재난.types.0.name" / "FUNCTIONS.0.name" / "CONTACTS.0.items.0.num")
+function setByPath(path, value) {
+  const keys = path.split('.');
+  let obj;
+  if (keys[0] === 'FUNCTIONS') {
+    obj = FUNCTIONS;
+    keys.shift();
+  } else if (keys[0] === 'CONTACTS') {
+    obj = CONTACTS;
+    keys.shift();
+  } else {
+    obj = DATA;
+  }
+  for (let i = 0; i < keys.length - 1; i++) {
+    obj = obj[keys[i]];
+  }
+  obj[keys[keys.length - 1]] = value;
+}
+
+function getByPath(path) {
+  const keys = path.split('.');
+  let obj;
+  if (keys[0] === 'FUNCTIONS') {
+    obj = FUNCTIONS;
+    keys.shift();
+  } else if (keys[0] === 'CONTACTS') {
+    obj = CONTACTS;
+    keys.shift();
+  } else {
+    obj = DATA;
+  }
+  for (let i = 0; i < keys.length; i++) {
+    if (obj == null) return undefined;
+    obj = obj[keys[i]];
+  }
+  return obj;
+}
+
+// 행동요령 항목 추가
+function addPhaseItem(catKey, idx, phase) {
+  if (!DATA[catKey].types[idx].phases) DATA[catKey].types[idx].phases = { 예방:[], 대비:[], 대응:[], 복구:[] };
+  if (!DATA[catKey].types[idx].phases[phase]) DATA[catKey].types[idx].phases[phase] = [];
+  DATA[catKey].types[idx].phases[phase].push('새 항목 (클릭하여 수정)');
+  saveData();
+  openModal(catKey, idx);
+}
+window.addPhaseItem = addPhaseItem;
+
+// 행동요령 항목 삭제
+function removePhaseItem(catKey, idx, phase, itemIdx) {
+  if (!confirm('이 항목을 삭제하시겠습니까?')) return;
+  DATA[catKey].types[idx].phases[phase].splice(itemIdx, 1);
+  saveData();
+  openModal(catKey, idx);
+}
+window.removePhaseItem = removePhaseItem;
+
+// 대책 추가
+function addMeasure(catKey, idx) {
+  if (!DATA[catKey].types[idx].대책) DATA[catKey].types[idx].대책 = [];
+  const next = String(DATA[catKey].types[idx].대책.length + 1).padStart(2, '0');
+  DATA[catKey].types[idx].대책.push({ n: next, name: '새 대책 (클릭하여 수정)', phase: '예방', dept: '담당부서' });
+  DATA[catKey].types[idx].대책수 = (DATA[catKey].types[idx].대책수 || 0) + 1;
+  saveData();
+  openModal(catKey, idx);
+}
+window.addMeasure = addMeasure;
+
+// 대책 삭제
+function removeMeasure(catKey, idx, measureIdx) {
+  if (!confirm('이 대책을 삭제하시겠습니까?')) return;
+  DATA[catKey].types[idx].대책.splice(measureIdx, 1);
+  DATA[catKey].types[idx].대책수 = Math.max(0, (DATA[catKey].types[idx].대책수 || 1) - 1);
+  saveData();
+  openModal(catKey, idx);
+}
+window.removeMeasure = removeMeasure;
+
+// 법령 추가/삭제
+function addLegal(catKey, idx) {
+  if (!DATA[catKey].types[idx].근거) DATA[catKey].types[idx].근거 = [];
+  DATA[catKey].types[idx].근거.push('새 법령 (클릭하여 수정)');
+  saveData();
+  openModal(catKey, idx);
+}
+window.addLegal = addLegal;
+
+function removeLegal(catKey, idx, legalIdx) {
+  if (!confirm('이 법령을 삭제하시겠습니까?')) return;
+  DATA[catKey].types[idx].근거.splice(legalIdx, 1);
+  saveData();
+  openModal(catKey, idx);
+}
+window.removeLegal = removeLegal;
+
+// 유형 삭제
+function removeType(catKey, idx) {
+  const name = DATA[catKey].types[idx].name;
+  if (!confirm(`"${name}" 유형을 삭제하시겠습니까?\n관련된 모든 데이터가 함께 삭제됩니다.`)) return;
+  DATA[catKey].types.splice(idx, 1);
+  saveData();
+  closeModal();
+  renderManual();
+}
+window.removeType = removeType;
+
+// 유형 추가
+function addType(catKey) {
+  const name = prompt(`새 ${catKey} 유형명을 입력하세요:`);
+  if (!name || !name.trim()) return;
+  DATA[catKey].types.push({
+    name: name.trim(),
+    summary: '유형 설명을 입력하세요',
+    주관기관: '미지정',
+    실국: '미지정',
+    과: '미지정',
+    예산: '',
+    피해: '',
+    목표: '',
+    근거: [],
+    phases: { 예방: [], 대비: [], 대응: [], 복구: [] },
+    대책수: 0,
+    대책: []
+  });
+  saveData();
+  renderManual();
+  // 새 카드 모달 열기
+  setTimeout(() => openModal(catKey, DATA[catKey].types.length - 1), 100);
+}
+window.addType = addType;
+
+// 협업기능 추가/삭제
+function addFunction() {
+  const next = String(FUNCTIONS.length + 1).padStart(2, '0');
+  FUNCTIONS.push({ num: next, name: '새 협업기능', dept: '담당부서', tasks: ['세부 임무를 입력하세요'] });
+  saveData();
+  document.getElementById('functionsGrid').innerHTML = '';
+  renderFunctions();
+}
+window.addFunction = addFunction;
+
+function removeFunction(idx) {
+  if (!confirm(`"${FUNCTIONS[idx].name}" 협업기능을 삭제하시겠습니까?`)) return;
+  FUNCTIONS.splice(idx, 1);
+  saveData();
+  document.getElementById('functionsGrid').innerHTML = '';
+  renderFunctions();
+}
+window.removeFunction = removeFunction;
+
+function addFuncTask(idx) {
+  FUNCTIONS[idx].tasks.push('새 임무 (클릭하여 수정)');
+  saveData();
+  document.getElementById('functionsGrid').innerHTML = '';
+  renderFunctions();
+}
+window.addFuncTask = addFuncTask;
+
+function removeFuncTask(idx, taskIdx) {
+  if (!confirm('이 임무를 삭제하시겠습니까?')) return;
+  FUNCTIONS[idx].tasks.splice(taskIdx, 1);
+  saveData();
+  document.getElementById('functionsGrid').innerHTML = '';
+  renderFunctions();
+}
+window.removeFuncTask = removeFuncTask;
+
+// 비상연락처 CRUD
+function renderContacts() {
+  const grid = document.getElementById('contactGrid');
+  if (!grid) return;
+  grid.innerHTML = CONTACTS.map((g, gi) => `
+    <div class="contact-group deletable">
+      ${editMode ? `<button class="del-btn" onclick="removeContactGroup(${gi})" title="그룹 삭제">×</button>` : ''}
+      <div class="contact-group-title">${makeEditable(g.title, `CONTACTS.${gi}.title`)}</div>
+      ${g.items.map((item, ii) => `
+        <div class="contact-item" style="position:relative;${editMode ? 'padding-right:28px;' : ''}">
+          <span class="contact-name">${makeEditable(item.name, `CONTACTS.${gi}.items.${ii}.name`)}</span>
+          <span class="contact-num">${makeEditable(item.num, `CONTACTS.${gi}.items.${ii}.num`)}</span>
+          ${editMode ? `<button class="del-btn" style="display:block;position:absolute;top:50%;right:0;transform:translateY(-50%);width:18px;height:18px;font-size:11px;" onclick="removeContactItem(${gi}, ${ii})">×</button>` : ''}
+        </div>
+      `).join('')}
+      ${editMode ? `<button class="add-btn" onclick="addContactItem(${gi})">연락처 추가</button>` : ''}
+    </div>
+  `).join('') + (editMode ? `
+    <div class="add-type-card" onclick="addContactGroup()">
+      <span class="add-type-card-icon">+</span>
+      <span>연락처 그룹 추가</span>
+    </div>
+  ` : '');
+}
+
+function addContactGroup() {
+  const title = prompt('새 연락처 그룹명을 입력하세요:');
+  if (!title || !title.trim()) return;
+  CONTACTS.push({ title: title.trim(), items: [{ name: '담당자명', num: '000-0000-0000' }] });
+  saveData();
+  renderContacts();
+}
+window.addContactGroup = addContactGroup;
+
+function removeContactGroup(idx) {
+  if (!confirm(`"${CONTACTS[idx].title}" 그룹을 삭제하시겠습니까?`)) return;
+  CONTACTS.splice(idx, 1);
+  saveData();
+  renderContacts();
+}
+window.removeContactGroup = removeContactGroup;
+
+function addContactItem(idx) {
+  CONTACTS[idx].items.push({ name: '담당자명 (클릭하여 수정)', num: '000-0000-0000' });
+  saveData();
+  renderContacts();
+}
+window.addContactItem = addContactItem;
+
+function removeContactItem(idx, itemIdx) {
+  if (!confirm('이 연락처를 삭제하시겠습니까?')) return;
+  CONTACTS[idx].items.splice(itemIdx, 1);
+  saveData();
+  renderContacts();
+}
+window.removeContactItem = removeContactItem;
+
+// 초기 데이터 로드
+loadData(true);
+
+// ============================================================
+// 대시보드 텍스트 편집 시스템 (dash-edit)
+// ============================================================
+const DASH_STORAGE_KEY = 'hwaseong_dashboard_texts_v1';
+let DASHBOARD_TEXTS = {}; // { 'hero.title': '...', ... }
+
+// localStorage에서 대시보드 텍스트 로드
+function loadDashboardTexts() {
+  try {
+    const saved = localStorage.getItem(DASH_STORAGE_KEY);
+    if (saved) {
+      DASHBOARD_TEXTS = JSON.parse(saved);
+    }
+  } catch (e) {
+    console.warn('대시보드 텍스트 로드 실패:', e);
+    DASHBOARD_TEXTS = {};
+  }
+}
+
+// 저장된 텍스트를 DOM에 적용 (페이지 로드 시 호출)
+function applyDashboardTexts() {
+  document.querySelectorAll('.dash-edit').forEach(el => {
+    const key = el.dataset.dashKey;
+    if (key && DASHBOARD_TEXTS[key] !== undefined) {
+      // multiline 요소는 innerHTML, 단일행은 textContent로 안전하게
+      if (el.dataset.multiline === 'true') {
+        el.innerHTML = DASHBOARD_TEXTS[key];
+      } else {
+        // strong 등 인라인 태그를 보존하기 위해 innerHTML 사용 (사용자가 직접 입력하는 텍스트)
+        el.innerHTML = DASHBOARD_TEXTS[key];
+      }
+    }
+  });
+}
+
+// 대시보드 텍스트 저장 (디바운스)
+let dashSaveTimer = null;
+function saveDashboardText(key, value) {
+  DASHBOARD_TEXTS[key] = value;
+  if (dashSaveTimer) clearTimeout(dashSaveTimer);
+  dashSaveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(DASH_STORAGE_KEY, JSON.stringify(DASHBOARD_TEXTS));
+      showToast('변경사항이 저장되었습니다');
+    } catch (e) {
+      showToast('저장 실패: 용량 초과', true);
+    }
+  }, 500);
+}
+
+// 대시보드 텍스트 초기화
+function resetDashboardTexts() {
+  DASHBOARD_TEXTS = {};
+  localStorage.removeItem(DASH_STORAGE_KEY);
+  location.reload();
+}
+
+// 편집 모드 시 dash-edit 요소들에 contentEditable 부여
+function applyDashEditMode() {
+  document.querySelectorAll('.dash-edit').forEach(el => {
+    if (editMode) {
+      el.setAttribute('contenteditable', 'true');
+      el.classList.add('editable');
+    } else {
+      el.removeAttribute('contenteditable');
+      el.classList.remove('editable');
+    }
+  });
+}
+
+// dash-edit 편집 이벤트 - blur 시 저장
+document.addEventListener('blur', (e) => {
+  if (!editMode) return;
+  if (!e.target.classList || !e.target.classList.contains('dash-edit')) return;
+  const key = e.target.dataset.dashKey;
+  if (!key) return;
+  const newValue = e.target.innerHTML.trim();
+  saveDashboardText(key, newValue);
+}, true);
+
+// Enter 처리 (multiline 아닌 경우)
+document.addEventListener('keydown', (e) => {
+  if (!editMode) return;
+  if (e.target.classList && e.target.classList.contains('dash-edit')) {
+    if (e.key === 'Enter' && e.target.dataset.multiline !== 'true') {
+      e.preventDefault();
+      e.target.blur();
+    }
+  }
+});
+
+// 초기 텍스트 로드 및 적용
+loadDashboardTexts();
+// DOM이 준비된 후 적용 (스크립트가 body 끝에 있으므로 즉시 호출 가능)
+applyDashboardTexts();
+
+// ============================================================
+// 실시간 시계 & 화성시 날씨 (Open-Meteo API)
+// ============================================================
+const HWASEONG_LAT = 37.1996;
+const HWASEONG_LON = 126.8311;
+const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+
+// 날씨 코드 → 아이콘·설명 (WMO Weather Code 표준)
+const WMO_CODE = {
+  0: { icon: '☀', desc: '맑음' },
+  1: { icon: '🌤', desc: '대체로 맑음' },
+  2: { icon: '⛅', desc: '부분 흐림' },
+  3: { icon: '☁', desc: '흐림' },
+  45: { icon: '🌫', desc: '안개' },
+  48: { icon: '🌫', desc: '서리 안개' },
+  51: { icon: '🌦', desc: '약한 이슬비' },
+  53: { icon: '🌦', desc: '이슬비' },
+  55: { icon: '🌦', desc: '강한 이슬비' },
+  56: { icon: '🌧', desc: '어는 이슬비' },
+  57: { icon: '🌧', desc: '강한 어는 이슬비' },
+  61: { icon: '🌧', desc: '약한 비' },
+  63: { icon: '🌧', desc: '비' },
+  65: { icon: '🌧', desc: '강한 비' },
+  66: { icon: '🌧', desc: '어는 비' },
+  67: { icon: '🌧', desc: '강한 어는 비' },
+  71: { icon: '🌨', desc: '약한 눈' },
+  73: { icon: '🌨', desc: '눈' },
+  75: { icon: '❄', desc: '폭설' },
+  77: { icon: '❄', desc: '싸락눈' },
+  80: { icon: '🌦', desc: '소나기' },
+  81: { icon: '🌧', desc: '강한 소나기' },
+  82: { icon: '⛈', desc: '폭우' },
+  85: { icon: '🌨', desc: '약한 눈소나기' },
+  86: { icon: '❄', desc: '강한 눈소나기' },
+  95: { icon: '⛈', desc: '뇌우' },
+  96: { icon: '⛈', desc: '뇌우·우박' },
+  99: { icon: '⛈', desc: '강한 뇌우·우박' }
+};
+
+// 시계 업데이트
+function updateClock() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  const h = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+
+  const dateEl = document.getElementById('liveDate');
+  const clockEl = document.getElementById('liveClock');
+  const dayEl = document.getElementById('liveDay');
+  if (dateEl) dateEl.textContent = `${y}년 ${parseInt(m)}월 ${parseInt(d)}일`;
+  if (clockEl) clockEl.textContent = `${h}:${min}`;
+  if (dayEl) dayEl.textContent = `${DAYS[now.getDay()]}요일 · ${s}초`;
+}
+
+// 날씨 업데이트
+async function updateWeather() {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${HWASEONG_LAT}&longitude=${HWASEONG_LON}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,wind_speed_10m&timezone=Asia%2FSeoul`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('weather fetch failed');
+    const data = await res.json();
+    const c = data.current;
+
+    const code = c.weather_code;
+    const isDay = c.is_day === 1;
+    const wmo = WMO_CODE[code] || { icon: '🌡', desc: '확인 중' };
+
+    // 밤시간 맑음/대체로 맑음 → 달
+    let icon = wmo.icon;
+    if (!isDay && (code === 0 || code === 1)) icon = '🌙';
+    if (!isDay && code === 2) icon = '☁';
+
+    document.getElementById('weatherIcon').textContent = icon;
+    document.getElementById('weatherTemp').textContent = Math.round(c.temperature_2m) + '°';
+    document.getElementById('weatherDesc').textContent = wmo.desc;
+    document.getElementById('weatherFeel').textContent = Math.round(c.apparent_temperature) + '°';
+    document.getElementById('weatherHumidity').textContent = c.relative_humidity_2m + '%';
+    document.getElementById('weatherWind').textContent = c.wind_speed_10m.toFixed(1) + ' m/s';
+    document.getElementById('weatherRain').textContent = c.precipitation.toFixed(1) + ' mm';
+
+    // 마지막 업데이트 시각
+    const upd = new Date();
+    document.getElementById('liveUpdate').textContent =
+      `업데이트 ${String(upd.getHours()).padStart(2,'0')}:${String(upd.getMinutes()).padStart(2,'0')}`;
+
+    // 기상특보 자동 감지 (간이 로직)
+    const alertEl = document.getElementById('weatherAlert');
+    const alertText = alertEl.querySelector('.live-alert-text');
+    let alerts = [];
+    if (c.temperature_2m >= 33) alerts.push('폭염주의');
+    if (c.temperature_2m <= -12) alerts.push('한파주의');
+    if (c.precipitation >= 20) alerts.push('호우주의');
+    if (c.wind_speed_10m >= 14) alerts.push('강풍주의');
+    if (code >= 95) alerts.push('뇌우 발생');
+
+    if (alerts.length > 0) {
+      alertText.textContent = alerts.join(' · ') + ' — 단계별 비상근무 검토 필요';
+      alertEl.style.display = 'flex';
+    } else {
+      alertEl.style.display = 'none';
+    }
+  } catch (e) {
+    console.warn('날씨 조회 실패:', e);
+    document.getElementById('weatherDesc').textContent = '날씨 조회 실패';
+    document.getElementById('liveUpdate').textContent = '연결 실패';
+  }
+}
+
+// 시계는 1초마다, 날씨는 10분마다 갱신
+updateClock();
+setInterval(updateClock, 1000);
+updateWeather();
+setInterval(updateWeather, 10 * 60 * 1000);
+
+// ============================================================
+// 렌더링
+// ============================================================
+const VIEWS = ['dashboard', 'manual', 'org', 'contact'];
+let currentView = 'dashboard';
+let currentFilter = '전체';
+let searchTerm = '';
+
+function switchView(name) {
+  currentView = name;
+  VIEWS.forEach(v => {
+    document.getElementById(`view-${v}`).classList.toggle('active', v === name);
+  });
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.view === name);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'manual') renderManual();
+  if (name === 'org') renderFunctions();
+  if (name === 'contact') renderContacts();
+}
+window.switchView = switchView;
+
+// 협업기능 렌더
+function renderFunctions() {
+  const grid = document.getElementById('functionsGrid');
+  if (grid.children.length > 0) return;
+  grid.innerHTML = FUNCTIONS.map((f, idx) => `
+    <div class="func-card deletable">
+      ${editMode ? `<button class="del-btn" onclick="removeFunction(${idx})" title="기능 삭제">×</button>` : ''}
+      <span class="func-num">FUNC ${makeEditable(f.num, `FUNCTIONS.${idx}.num`)}</span>
+      <div class="func-name">${makeEditable(f.name, `FUNCTIONS.${idx}.name`)}</div>
+      <div class="func-dept">▸ ${makeEditable(f.dept, `FUNCTIONS.${idx}.dept`)}</div>
+      <ul class="func-tasks">
+        ${f.tasks.map((t, ti) => `
+          <li style="position:relative;">
+            ${makeEditable(t, `FUNCTIONS.${idx}.tasks.${ti}`, true)}
+            ${editMode ? `<button class="del-btn" style="position:absolute;top:-2px;right:-2px;width:18px;height:18px;font-size:11px;" onclick="removeFuncTask(${idx}, ${ti})" title="임무 삭제">×</button>` : ''}
+          </li>
+        `).join('')}
+        ${editMode ? `<li style="list-style:none;padding-left:0;"><button class="add-btn" onclick="addFuncTask(${idx})">임무 추가</button></li>` : ''}
+      </ul>
+    </div>
+  `).join('') + (editMode ? `
+    <div class="add-type-card" onclick="addFunction()">
+      <span class="add-type-card-icon">+</span>
+      <span>협업기능 추가</span>
+    </div>
+  ` : '');
+}
+
+// 매뉴얼(유형) 렌더
+function renderManual() {
+  const root = document.getElementById('manualContent');
+  const term = searchTerm.toLowerCase().trim();
+  let total = 0;
+  let html = '';
+
+  Object.keys(DATA).forEach(catKey => {
+    if (currentFilter !== '전체' && currentFilter !== catKey) return;
+    const cat = DATA[catKey];
+    const filtered = cat.types.filter(t => {
+      if (!term) return true;
+      const hay = [
+        t.name, t.summary || '', t.주관기관 || '', t.실국 || '', t.과 || '',
+        (t.근거 || []).join(' '),
+        (t.대책 || []).map(m => m.name + ' ' + m.dept).join(' ')
+      ].join(' ').toLowerCase();
+      return hay.includes(term);
+    });
+
+    if (filtered.length === 0) return;
+    total += filtered.length;
+
+    const totalMeasures = filtered.reduce((s, t) => s + (t.대책수 || 0), 0);
+
+    html += `
+      <div class="cat-section ${cat.color}">
+        <div class="cat-head">
+          <div class="cat-head-left">
+            <span class="cat-code">${cat.code}</span>
+            <span class="cat-name">${catKey}</span>
+          </div>
+          <div class="cat-stats">
+            <span><strong>${filtered.length}</strong> 유형</span>
+            <span><strong>${totalMeasures}</strong> 대책</span>
+          </div>
+        </div>
+        <div class="types-grid">
+          ${filtered.map(t => {
+            const idx = cat.types.indexOf(t);
+            return `
+              <div class="type-card" data-cat="${catKey}" data-idx="${idx}">
+                <div class="type-card-top">
+                  <div class="type-name">${t.name}${t.risk ? `<span class="risk-tag">${t.risk}</span>` : ''}</div>
+                  <span class="measure-count">${t.대책수 || 0}개</span>
+                </div>
+                <div class="type-dept">
+                  <span class="type-dept-dot"></span>
+                  ${t.실국} · ${t.과}
+                </div>
+                <div class="type-meta">
+                  <span>▸ <strong>${t.주관기관 || '미지정'}</strong></span>
+                </div>
+              </div>
+            `;
+          }).join('')}
+          <div class="add-type-card" onclick="event.stopPropagation(); addType('${catKey}')">
+            <span class="add-type-card-icon">+</span>
+            <span>${catKey} 유형 추가</span>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  if (total === 0) {
+    html = `<div class="empty"><div class="empty-icon">⌕</div><div class="empty-text">검색 결과가 없습니다. 다른 키워드로 검색해보세요.</div></div>`;
+  }
+
+  root.innerHTML = html;
+
+  // 카드 이벤트
+  document.querySelectorAll('.type-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const cat = card.dataset.cat;
+      const idx = parseInt(card.dataset.idx);
+      openModal(cat, idx);
+    });
+  });
+}
+
+// 모달
+function openModal(catKey, idx) {
+  const t = DATA[catKey].types[idx];
+  const modal = document.getElementById('modal');
+  const bg = document.getElementById('modalBg');
+  const basePath = `${catKey}.types.${idx}`;
+
+  modal.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-header-content">
+        <div class="modal-cat-tag ${catKey}">${DATA[catKey].code} · ${catKey} · TYPE ${String(idx+1).padStart(2,'0')}</div>
+        <h2 class="modal-title">
+          ${makeEditable(t.name, `${basePath}.name`)}
+          ${t.risk ? `<span class="risk-tag" style="font-size:11px;">${makeEditable(t.risk, `${basePath}.risk`)}</span>` : ''}
+        </h2>
+        <div class="modal-summary">${makeEditable(t.summary || '유형 설명을 입력하세요', `${basePath}.summary`, true)}</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        ${editMode ? `<button class="modal-close" style="background:var(--sev-severe);border-color:var(--sev-severe);color:white;" onclick="removeType('${catKey}', ${idx})" title="유형 삭제">🗑</button>` : ''}
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="info-row">
+        <div class="info-card">
+          <div class="info-card-label">📋 주관기관</div>
+          <div class="info-card-value">${makeEditable(t.주관기관 || '-', `${basePath}.주관기관`)}</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🏛 시·군·구 주관부서</div>
+          <div class="info-card-value">${makeEditable(t.실국 || '-', `${basePath}.실국`)} · ${makeEditable(t.과 || '-', `${basePath}.과`)}</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">📊 피해현황</div>
+          <div class="info-card-value">${makeEditable(t.피해 || '안전관리계획 본문 참조', `${basePath}.피해`)}</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🎯 '26년 목표</div>
+          <div class="info-card-value">${makeEditable(t.목표 || '-', `${basePath}.목표`)}</div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">재난관리 4단계 행동 매뉴얼</div>
+        <div class="manual-phases">
+          ${['예방','대비','대응','복구'].map((p, i) => {
+            const items = (t.phases && t.phases[p]) ? t.phases[p] : [];
+            return `
+              <div class="manual-phase ${p}">
+                <div class="manual-phase-num">PHASE 0${i+1}</div>
+                <div class="manual-phase-name">${p}단계</div>
+                <ul class="manual-phase-list">
+                  ${items.length > 0 ? items.map((item, ii) => `
+                    <li style="position:relative; ${editMode ? 'padding-right:22px;' : ''}">
+                      ${makeEditable(item, `${basePath}.phases.${p}.${ii}`, true)}
+                      ${editMode ? `<button class="del-btn" style="display:block;position:absolute;top:2px;right:0;width:18px;height:18px;font-size:11px;" onclick="removePhaseItem('${catKey}', ${idx}, '${p}', ${ii})">×</button>` : ''}
+                    </li>
+                  `).join('') : `<li style="color:var(--text-3);font-style:italic;">항목 없음</li>`}
+                </ul>
+                ${editMode ? `<div class="phase-add" onclick="addPhaseItem('${catKey}', ${idx}, '${p}')">+ ${p} 항목 추가</div>` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">근거 법령 및 규정</div>
+        <div class="legal-list">
+          ${(t.근거 || []).map((l, li) => `
+            <div class="legal-pill" style="position:relative; ${editMode ? 'padding-right:36px;' : ''}">
+              ${makeEditable(l, `${basePath}.근거.${li}`, true)}
+              ${editMode ? `<button class="del-btn" onclick="removeLegal('${catKey}', ${idx}, ${li})">×</button>` : ''}
+            </div>
+          `).join('')}
+          ${(!t.근거 || t.근거.length === 0) ? `<div style="padding:16px;background:var(--bg-2);border-radius:8px;color:var(--text-3);font-size:12px;text-align:center;">등록된 법령이 없습니다</div>` : ''}
+          ${editMode ? `<button class="add-btn" onclick="addLegal('${catKey}', ${idx})">법령 추가</button>` : ''}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">세부 추진대책 (등재 ${(t.대책 || []).length}개${t.대책수 ? ` / 총 ${t.대책수}개` : ''})</div>
+        <div class="measure-table">
+          <div class="measure-row header">
+            <span>NO</span>
+            <span>대책명</span>
+            <span>단계</span>
+            <span>담당부서${editMode ? ' / 삭제' : ''}</span>
+          </div>
+          ${(t.대책 || []).map((m, mi) => `
+            <div class="measure-row" style="position:relative;">
+              <span class="m-num">${makeEditable(m.n, `${basePath}.대책.${mi}.n`)}</span>
+              <span class="m-name">${makeEditable(m.name, `${basePath}.대책.${mi}.name`, true)}</span>
+              <span class="m-phase ${m.phase}">${makeEditable(m.phase, `${basePath}.대책.${mi}.phase`)}</span>
+              <span class="m-dept" style="display:flex;align-items:center;justify-content:space-between;gap:4px;">
+                <span style="flex:1;">${makeEditable(m.dept, `${basePath}.대책.${mi}.dept`)}</span>
+                ${editMode ? `<button class="del-btn" style="display:block;position:static;width:20px;height:20px;font-size:12px;flex-shrink:0;" onclick="removeMeasure('${catKey}', ${idx}, ${mi})">×</button>` : ''}
+              </span>
+            </div>
+          `).join('')}
+          ${(!t.대책 || t.대책.length === 0) ? `<div style="padding:20px;color:var(--text-3);font-size:12px;text-align:center;">등재된 대책이 없습니다</div>` : ''}
+        </div>
+        ${editMode ? `<button class="add-btn" onclick="addMeasure('${catKey}', ${idx})">대책 추가</button>` : ''}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">사고 발생 시 즉시 조치 절차 (표준)</div>
+        <div class="emergency-flow">
+          <div class="emerg-step">
+            <div class="emerg-step-num">1</div>
+            <div class="emerg-step-body">
+              <div class="emerg-step-title">상황 접수 및 파악</div>
+              <div class="emerg-step-desc">119종합상황실·재난안전상황실 통한 발생일시·장소·현상·원인·피해가능성 파악 → 신고자 인적사항 확인</div>
+            </div>
+          </div>
+          <div class="emerg-step">
+            <div class="emerg-step-num">2</div>
+            <div class="emerg-step-body">
+              <div class="emerg-step-title">상황 전파 및 보고</div>
+              <div class="emerg-step-desc">시장·부시장·안전건설실장 보고 → 주관부서(${t.과 || '담당과'}) 및 유관기관(경찰·소방·한전 등) 전파</div>
+            </div>
+          </div>
+          <div class="emerg-step">
+            <div class="emerg-step-num">3</div>
+            <div class="emerg-step-body">
+              <div class="emerg-step-title">상황판단회의 및 위기경보 발령</div>
+              <div class="emerg-step-desc">위기징후 분석·평가 → 부단체장 주재 상황판단회의 → 관심·주의·경계·심각 단계별 경보 발령</div>
+            </div>
+          </div>
+          <div class="emerg-step">
+            <div class="emerg-step-num">4</div>
+            <div class="emerg-step-body">
+              <div class="emerg-step-title">비상기구 가동 및 현장대응</div>
+              <div class="emerg-step-desc">지역재난안전대책본부·재난현장통합지원본부 설치 → 13개 협업기능 가동 → 인명구조·응급복구·이재민구호 동시 추진</div>
+            </div>
+          </div>
+          <div class="emerg-step">
+            <div class="emerg-step-num">5</div>
+            <div class="emerg-step-body">
+              <div class="emerg-step-title">수습·복구 및 사후 평가</div>
+              <div class="emerg-step-desc">Life-Line 복구 → 피해조사·NDMS 입력 → 재난지원금 지급 → 사례 분석 → 매뉴얼 환류</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  bg.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  modal.scrollTop = 0;
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('active');
+  document.body.style.overflow = '';
+}
+window.closeModal = closeModal;
+
+document.getElementById('modalBg').addEventListener('click', (e) => {
+  if (e.target.id === 'modalBg') closeModal();
+});
+
+// 긴급모드
+function emergencyMode() {
+  switchView('manual');
+  setTimeout(() => {
+    document.getElementById('searchInput').focus();
+  }, 300);
+}
+window.emergencyMode = emergencyMode;
+
+// Tabs
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchView(tab.dataset.view));
+});
+
+// 필터
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('chip')) {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    currentFilter = e.target.dataset.filter;
+    renderManual();
+  }
+});
+
+// 검색
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchTerm = e.target.value;
+  if (currentView !== 'manual') switchView('manual');
+  renderManual();
+});
+
+// 단축키
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if (e.key === 'Escape') closeModal();
+});
+
+// 초기 로드 (대시보드는 정적이므로 매뉴얼은 클릭 시 렌더)
+</script>
+
+</body>
+</html>
